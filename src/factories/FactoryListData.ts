@@ -1,9 +1,15 @@
 import OptionApiModel from "../models/OptionApiModel";
 
 export default class FactoryListData {
-  private static customers: Array<OptionApiModel> = this.getCustomers();
+  private static customers: Array<OptionApiModel> = this.CreateList();
 
   static getCustomers(): Array<OptionApiModel> {
+    console.log("Get Customers from factory");
+
+    return this.customers;
+  }
+
+  private static CreateList(): Array<OptionApiModel> {
     return [
       new OptionApiModel("1594", "A Wain Hope Lake Foods"),
       new OptionApiModel("2211", "A Wright Transport"),

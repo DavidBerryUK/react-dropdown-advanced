@@ -3,57 +3,70 @@ import DemoContainer from "../../container/DemoContainer";
 import DropDownItem from "./DropDownItem";
 import FactoryListData from "../../../factories/FactoryListData";
 import OptionApiModel from "../../../models/OptionApiModel";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import useAutoItemFocus from "./hooks/UseAutoItemFocus";
 import useAutoPopupDismiss from "./hooks/UseAutoPopupDismiss";
 import useKeyboardEventsHandlers from "./hooks/UseKeyboardEventsHandlers";
 import useMouseEventsHandler from "./hooks/UseMouseEventsHandler";
 
-const version = "10";
-const className = "demo-0010";
-const title = "Code Tidy";
-const description = "Only Code tidy using hooks, it is slower than the non-hooks code. may need to revert.";
+const version = "12";
+const className = "demo-0012";
+const title = "Favourites (Failed)";
+const description = "allow selection of favourite items - failed - this is inefficent as renders list everytime selected index changes.";
 
-const DropDown0010CodeTidy: React.FC = () => {
-  const [customers, setCustomers] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
-  const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
+const DropDown0012Favorites: React.FC = () => {
+  const [value, setValue] = useState<OptionApiModel | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [highlightIndex, setHighlightIndex] = useState(0);
   const optionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const filteredOptions = customers.filter((option) => option.text.toLowerCase().includes(searchTerm.toLowerCase()));
+  const [filteredOptions, setFilteredOptions] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
+  const [listItems, setListItems] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
 
   useAutoPopupDismiss(containerRef, inputRef, setIsOpen);
   useAutoItemFocus(optionRefs, highlightIndex);
-  const { handleKeyDownEvent } = useKeyboardEventsHandlers(isOpen, highlightIndex, filteredOptions, setHighlightIndex, optionRefs, containerRef, setIsOpen, setValue, setSearchTerm);
-  const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setSearchTerm, setHighlightIndex);
 
   useEffect(() => {
-    setCustomers(FactoryListData.getCustomers());
+    setListItems(FactoryListData.getCustomers());
   }, []);
+
+  const { handleKeyDownEvent } = useKeyboardEventsHandlers(isOpen, highlightIndex, filteredOptions, setHighlightIndex, optionRefs, containerRef, setIsOpen, setValue, setSearchTerm);
+  const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setSearchTerm, setHighlightIndex);
 
   /**
    * handle text change event
    */
   const handleOnTextChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    const filterValue = e.target.value;
+
+    setSearchTerm(filterValue);
+
+    setFilteredOptions(listItems.filter((option) => option.text.toLowerCase().includes(filterValue)));
+
+    if (isOpen === false) {
+      setIsOpen(true);
+    }
   };
+
+  const handleOnFavouriteUpdatedEvent = useCallback(
+    (updatedItem: OptionApiModel) => {
+      console.log(`Updating item ${updatedItem.text} : ${updatedItem.favourite}`);
+      // Update the listItems array with the updated item
+      const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
+
+      // Update the filtered options to include the updated item
+      setListItems(updatedItems);
+      setFilteredOptions(updatedItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
+    },
+    [listItems, searchTerm],
+  );
 
   return (
     <DemoContainer className={className} version={version} title={title} description={description}>
       <div className="ui-dropdown">
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Select an option..."
-          value={searchTerm || value.text || ""}
-          onKeyDown={handleKeyDownEvent}
-          onClick={handleInputBoxClickEvent}
-          onChange={handleOnTextChangeEvent}
-        />
+        <input ref={inputRef} type="text" placeholder="Select an option..." value={searchTerm} onKeyDown={handleKeyDownEvent} onClick={handleInputBoxClickEvent} onChange={handleOnTextChangeEvent} />
         {isOpen && (
           <div className="ui-region-popup" ref={containerRef}>
             <div className="option-list-container">
@@ -70,6 +83,7 @@ const DropDown0010CodeTidy: React.FC = () => {
                       highlighted={highlighted}
                       onSelected={handleOnOptionSelectedEvent}
                       onMouseOver={handleMouseOverEvent}
+                      onFavouriteUpdated={handleOnFavouriteUpdatedEvent}
                     />
                   );
                 })}
@@ -81,4 +95,4 @@ const DropDown0010CodeTidy: React.FC = () => {
   );
 };
 
-export default DropDown0010CodeTidy;
+export default DropDown0012Favorites;
