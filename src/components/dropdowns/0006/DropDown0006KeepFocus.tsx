@@ -4,11 +4,12 @@ import DropDownItem from "./DropDownItem";
 import FactoryListData from "../../../factories/FactoryListData";
 import OptionApiModel from "../../../models/OptionApiModel";
 import React, { useState } from "react";
+import ConstantsKeyboard from "../../constants/ConstantsKeyboard";
 
-const KEY_ARROW_DOWN = "ArrowDown";
-const KEY_ARROW_UP = "ArrowUp";
-const KEY_ENTER = "Enter";
-const KEY_ESCAPE = "Escape";
+const version = "6";
+const className = "demo-0006";
+const title = "Keep Focus";
+const description = "keep focus on the selected item when pressing up/down";
 
 const DropDown0006KeepFocus: React.FC = () => {
   const [customers] = useState(FactoryListData.getCustomers());
@@ -32,24 +33,24 @@ const DropDown0006KeepFocus: React.FC = () => {
    * process keyboard events
    */
   const handleKeyDownEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === KEY_ARROW_DOWN) {
+    if (e.key === ConstantsKeyboard.KEY_ARROW_DOWN) {
       e.preventDefault();
       setHighlightIndex((prevIndex) => (prevIndex + 1) % filteredOptions.length);
-    } else if (e.key === KEY_ARROW_UP) {
+    } else if (e.key === ConstantsKeyboard.KEY_ARROW_UP) {
       e.preventDefault();
       setHighlightIndex((prevIndex) => (prevIndex - 1 + filteredOptions.length) % filteredOptions.length);
-    } else if (e.key === KEY_ENTER) {
+    } else if (e.key === ConstantsKeyboard.KEY_ENTER) {
       e.preventDefault();
       if (isOpen && filteredOptions.length > 0) {
         //handleSelect(filteredOptions[highlightIndex]);
       }
-    } else if (e.key === KEY_ESCAPE) {
+    } else if (e.key === ConstantsKeyboard.KEY_ESCAPE) {
       setIsOpen(false);
     }
   };
 
   /**
-   * handle text change event
+   * handle text change eventS
    */
   const handleOnTextChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -60,7 +61,7 @@ const DropDown0006KeepFocus: React.FC = () => {
   };
 
   return (
-    <DemoContainer className="demo-0006" version="6" title="Keep Focus" description="keep focus on the selected item when pressing up/down">
+    <DemoContainer className={className} version={version} title={title} description={description}>
       <div className="ui-dropdown">
         <input
           type="text"

@@ -4,11 +4,12 @@ import DropDownItem from "./DropDownItem";
 import FactoryListData from "../../../factories/FactoryListData";
 import OptionApiModel from "../../../models/OptionApiModel";
 import React, { useState } from "react";
+import ConstantsKeyboard from "../../constants/ConstantsKeyboard";
 
-const KEY_ARROW_DOWN = "ArrowDown";
-const KEY_ARROW_UP = "ArrowUp";
-const KEY_ENTER = "Enter";
-const KEY_ESCAPE = "Escape";
+const version = "5";
+const className = "demo-0005";
+const title = "Up/Down Keys";
+const description = "process keyboard events for up down keys when the list is open. Just basic capturing";
 
 const DropDown0005UpDownKeys: React.FC = () => {
   const [customers] = useState(FactoryListData.getCustomers());
@@ -32,18 +33,18 @@ const DropDown0005UpDownKeys: React.FC = () => {
    * process keyboard events
    */
   const handleKeyDownEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === KEY_ARROW_DOWN) {
+    if (e.key === ConstantsKeyboard.KEY_ARROW_DOWN) {
       e.preventDefault();
       setHighlightIndex((prevIndex) => (prevIndex + 1) % filteredOptions.length);
-    } else if (e.key === KEY_ARROW_UP) {
+    } else if (e.key === ConstantsKeyboard.KEY_ARROW_UP) {
       e.preventDefault();
       setHighlightIndex((prevIndex) => (prevIndex - 1 + filteredOptions.length) % filteredOptions.length);
-    } else if (e.key === KEY_ENTER) {
+    } else if (e.key === ConstantsKeyboard.KEY_ENTER) {
       e.preventDefault();
       if (isOpen && filteredOptions.length > 0) {
         //handleSelect(filteredOptions[highlightIndex]);
       }
-    } else if (e.key === KEY_ESCAPE) {
+    } else if (e.key === ConstantsKeyboard.KEY_ESCAPE) {
       setIsOpen(false);
     }
   };
@@ -60,7 +61,7 @@ const DropDown0005UpDownKeys: React.FC = () => {
   };
 
   return (
-    <DemoContainer className="demo-0005" version="5" title="Up/Down Keys" description="process keyboard events for up down keys when the list is open. Just basic capturing">
+    <DemoContainer className={className} version={version} title={title} description={description}>
       <div className="ui-dropdown">
         <input
           type="text"

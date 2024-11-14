@@ -4,13 +4,12 @@ import DropDownItem from "./DropDownItem";
 import FactoryListData from "../../../factories/FactoryListData";
 import OptionApiModel from "../../../models/OptionApiModel";
 import React, { useEffect, useRef, useState } from "react";
+import ConstantsKeyboard from "../../constants/ConstantsKeyboard";
 
-const KEY_ARROW_DOWN = "ArrowDown";
-const KEY_ARROW_UP = "ArrowUp";
-const KEY_ENTER = "Enter";
-const KEY_ESCAPE = "Escape";
-const KEY_PAGE_UP = "PageUp";
-const KEY_PAGE_DOWN = "PageDown";
+const version = "7";
+const className = "demo-0007";
+const title = "Page Up/Down";
+const description = "allow page up / down for selection, events are not refined as yet";
 
 const DropDown0007PageUpDown: React.FC = () => {
   const [customers] = useState(FactoryListData.getCustomers());
@@ -18,7 +17,6 @@ const DropDown0007PageUpDown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [highlightIndex, setHighlightIndex] = useState(0);
-
   const optionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -60,26 +58,26 @@ const DropDown0007PageUpDown: React.FC = () => {
    * process keyboard events
    */
   const handleKeyDownEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === KEY_ARROW_DOWN) {
+    if (e.key === ConstantsKeyboard.KEY_ARROW_DOWN) {
       e.preventDefault();
       setHighlightIndex((prevIndex) => (prevIndex + 1) % filteredOptions.length);
-    } else if (e.key === KEY_PAGE_UP) {
+    } else if (e.key === ConstantsKeyboard.KEY_PAGE_UP) {
       e.preventDefault();
       const pageJump = calculatePageJump();
       setHighlightIndex((prevIndex) => Math.max(prevIndex - pageJump, 0));
-    } else if (e.key === KEY_PAGE_DOWN) {
+    } else if (e.key === ConstantsKeyboard.KEY_PAGE_DOWN) {
       e.preventDefault();
       const pageJump = calculatePageJump();
       setHighlightIndex((prevIndex) => Math.min(prevIndex + pageJump, filteredOptions.length - 1));
-    } else if (e.key === KEY_ARROW_UP) {
+    } else if (e.key === ConstantsKeyboard.KEY_ARROW_UP) {
       e.preventDefault();
       setHighlightIndex((prevIndex) => (prevIndex - 1 + filteredOptions.length) % filteredOptions.length);
-    } else if (e.key === KEY_ENTER) {
+    } else if (e.key === ConstantsKeyboard.KEY_ENTER) {
       e.preventDefault();
       if (isOpen && filteredOptions.length > 0) {
         //handleSelect(filteredOptions[highlightIndex]);
       }
-    } else if (e.key === KEY_ESCAPE) {
+    } else if (e.key === ConstantsKeyboard.KEY_ESCAPE) {
       setIsOpen(false);
     }
   };
@@ -96,7 +94,7 @@ const DropDown0007PageUpDown: React.FC = () => {
   };
 
   return (
-    <DemoContainer className="demo-0007" version="7" title="Page Up/Down" description="allow page up / down for selection">
+    <DemoContainer className={className} version={version} title={title} description={description}>
       <div className="ui-dropdown">
         <input
           type="text"

@@ -4,6 +4,11 @@ import OptionApiModel from "../../../models/OptionApiModel";
 import DemoContainer from "../../container/DemoContainer";
 import "./Styles.scss";
 
+const version = "3";
+const className = "demo-0003";
+const title = "Better Popup";
+const description = "Make the drop down list 'popup' rather than expanding the container";
+
 const DropDown0003Popup: React.FC = () => {
   const [customers] = useState(FactoryListData.getCustomers());
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
@@ -23,7 +28,7 @@ const DropDown0003Popup: React.FC = () => {
   };
 
   return (
-    <DemoContainer className="demo-0003" version="3" title="Better Popup" description="Make the drop down list 'popup' rather than expanding the container">
+    <DemoContainer className={className} version={version} title={title} description={description}>
       <div className="ui-dropdown">
         <input type="text" placeholder="Select an option..." value={searchTerm || value.text || ""} onClick={() => setIsOpen(!isOpen)} onChange={(e) => setSearchTerm(e.target.value)} />
         {isOpen && (

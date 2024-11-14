@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import "./Styles.scss";
+import DemoContainer from "../../container/DemoContainer";
+import DropDownItem from "./DropDownItem";
 import FactoryListData from "../../../factories/FactoryListData";
 import OptionApiModel from "../../../models/OptionApiModel";
-import DemoContainer from "../../container/DemoContainer";
-import "./Styles.scss";
-import DropDownItem from "./DropDownItem";
+import React, { useState } from "react";
+
+const version = "4";
+const className = "demo-0004";
+const title = "Render Sub Items";
+const description = "Render sub items as components";
 
 const DropDown0004SubItems: React.FC = () => {
   const [customers] = useState(FactoryListData.getCustomers());
@@ -24,7 +29,7 @@ const DropDown0004SubItems: React.FC = () => {
   };
 
   return (
-    <DemoContainer className="demo-0004" version="4" title="Render Sub Items" description="Render sub items as components">
+    <DemoContainer className={className} version={version} title={title} description={description}>
       <div className="ui-dropdown">
         <input type="text" placeholder="Select an option..." value={searchTerm || value.text || ""} onClick={() => setIsOpen(!isOpen)} onChange={(e) => setSearchTerm(e.target.value)} />
         {isOpen && (

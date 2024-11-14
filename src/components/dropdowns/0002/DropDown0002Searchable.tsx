@@ -4,6 +4,11 @@ import OptionApiModel from "../../../models/OptionApiModel";
 import DemoContainer from "../../container/DemoContainer";
 import "./Styles.scss";
 
+const version = "2";
+const className = "demo-0002";
+const title = "Basic & Searchable";
+const description = "A Very basic dropdown with a UL List that is searchable";
+
 const DropDown0002Searchable: React.FC = () => {
   const [customers] = useState(FactoryListData.getCustomers());
 
@@ -24,7 +29,7 @@ const DropDown0002Searchable: React.FC = () => {
   };
 
   return (
-    <DemoContainer className="demo-0002" version="2" title="Basic & Searchable" description="A Very basic dropdown with a UL List that is searchable">
+    <DemoContainer className={className} version={version} title={title} description={description}>
       <div>
         <input type="text" placeholder="Select an option..." value={searchTerm || value.text || ""} onClick={() => setIsOpen(!isOpen)} onChange={(e) => setSearchTerm(e.target.value)} />
         {isOpen && (
