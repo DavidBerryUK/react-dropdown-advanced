@@ -8,6 +8,7 @@ import DropDown0005UpDownKeys from "../dropdowns/0005/DropDown0005UpDownKeys";
 import DropDown0006KeepFocus from "../dropdowns/0006/DropDown0006KeepFocus";
 import DropDown0007PageUpDown from "../dropdowns/0007/DropDown0007PageUpDown";
 import DropDown0008SelectItem from "../dropdowns/0008/DropDown0008SelectItem";
+import DropDown0009Dismiss from "../dropdowns/0009/DropDown0009Dismiss";
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
       <DropDown0006KeepFocus />
       <DropDown0007PageUpDown />
       <DropDown0008SelectItem />
+      <DropDown0009Dismiss />
     </div>
   );
 };
