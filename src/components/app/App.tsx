@@ -4,6 +4,7 @@ import DropDown0002Searchable from "../dropdowns/0002/DropDown0002Searchable";
 import DropDown0003Popup from "../dropdowns/0003/DropDown0003Popup";
 import DropDown0004SubItems from "../dropdowns/0004/DropDown0004SubItems";
 import React from "react";
+import DropDown0005UpDownKeys from "../dropdowns/0005/DropDown0005UpDownKeys";
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <DropDown0002Searchable />
       <DropDown0003Popup />
       <DropDown0004SubItems />
+      <DropDown0005UpDownKeys />
     </div>
   );
 };
