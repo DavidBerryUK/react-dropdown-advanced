@@ -9,7 +9,7 @@ import ConstantsKeyboard from "../../constants/ConstantsKeyboard";
 const version = "6";
 const className = "demo-0006";
 const title = "Keep Focus";
-const description = "keep focus on the selected item when pressing up/down";
+const description = "keep visual focus on the selected item when pressing up/down, previously the selected item wasn't visible.";
 
 const DropDown0006KeepFocus: React.FC = () => {
   const [customers] = useState(FactoryListData.getCustomers());
