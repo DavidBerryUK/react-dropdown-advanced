@@ -1,0 +1,52 @@
+$container-background-colour:#fff;
+$text-colour:#297fb8;
+// $version-colour:#16a086;
+//$version-colour:#e84c3d;
+$version-colour:#8d44ad;
+$title-Colour:lighten(#8d44ad,10);
+
+.ui-container {
+    border:solid 1px $container-background-colour;
+    width:300px;
+    min-height:120px;
+    border-radius: 4px;
+    
+    padding:8px;
+    background-color: $container-background-colour;
+    display: flex;
+    flex-direction: column;
+    color: $text-colour;        
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    .version, .title {        
+        font-weight: bold;                
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 16px;
+    }
+
+    .title{
+        font-size: 24px;        
+        color: $title-Colour;
+    }
+
+    .version{
+        font-size: 32px;
+        color: $version-colour;
+        font-weight: 900;
+    }
+
+    .description {
+        font-size: 14px;
+        font-weight: 600;
+        padding:8px;
+    }
+
+    .demo {        
+        background-color: #fff;
+    }
+}
