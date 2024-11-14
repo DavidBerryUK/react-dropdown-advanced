@@ -29,9 +29,6 @@ const DropDown0007PageUpDown: React.FC = () => {
     const containerHeight = containerRef.current?.clientHeight || 0;
     const averageItemHeight = optionRefs.current.reduce((sum, ref) => sum + (ref?.offsetHeight || 0), 0) / optionRefs.current.length || 1;
     const jump = Math.floor(containerHeight / averageItemHeight);
-
-    console.log(`calculatePageJump: height:${containerHeight}   averageHeight:${averageItemHeight}   jump:${jump}`);
-
     return jump;
   };
 

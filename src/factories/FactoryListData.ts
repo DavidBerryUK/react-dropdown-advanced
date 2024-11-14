@@ -894,7 +894,6 @@ export default class FactoryListData {
       new OptionApiModel("1135681519", "Yorkshire Ambulance Service (St John)"),
       new OptionApiModel("-981034060", "Yusen Logistics (Santander)"),
       new OptionApiModel("-2145928393", "Zenith Vehicle Solutions Ltd"),
-      new OptionApiModel("2146745285", ""),
     ];
   }
 }

@@ -6,7 +6,7 @@ import OptionApiModel from "../../../models/OptionApiModel";
 import React, { useEffect, useRef, useState } from "react";
 import ConstantsKeyboard from "../../constants/ConstantsKeyboard";
 
-const version = "8";
+const version = "9";
 const className = "demo-0009";
 const title = "Dismiss Popup";
 const description = "Dismiss popup when click outside popup";
