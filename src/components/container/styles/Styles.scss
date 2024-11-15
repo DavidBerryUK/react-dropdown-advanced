@@ -6,6 +6,7 @@ $version-colour:#8d44ad;
 $title-Colour:lighten(#8d44ad,10);
 
 .ui-container {
+    user-select: none;
     border:solid 1px $container-background-colour;
     width:300px;
     min-height:120px;

@@ -42,15 +42,25 @@
       /* Use flex layout for vertical alignment */
       display: flex;
       flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
     }
     
     .option-list-toolbar {
+      position: relative;
       height: 40px;
-      box-sizing: border-box;
-      width: 100%;
-      border: solid 1px blue;
+      box-sizing: border-box;      
+      background-color: #eee;      
+      border:solid 1px #e5e5e5;
+      border-radius: 4px;
+      margin-top: 4px;  
+      margin-bottom: 6px;    
+      margin-left: 4px;
+      margin-right: 4px;
+      padding-left: 4px;
       /* Prevent shrinking */
       flex-shrink: 0;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 4px;
     }
     
     .option-list-container {
@@ -60,7 +70,7 @@
       overflow-y: auto;
       margin-left: 4px;
       margin-right: 4px;
-    
+      
       /* Allow dynamic resizing up to a maximum height */
       flex-grow: 1;
       max-height: $popup-height-max;

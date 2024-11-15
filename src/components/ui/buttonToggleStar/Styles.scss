@@ -1,0 +1,11 @@
+.ui-botton-toggle-star {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.75s ease-in-out; // Default transition
+
+  &:hover {
+    transform: scale(1.2); // Scale on hover
+    transition: transform 0.2s ease-in-out; // Faster transition on hover
+  }
+}

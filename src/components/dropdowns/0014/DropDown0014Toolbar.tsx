@@ -8,8 +8,9 @@ import useAutoPopupDismiss from "./hooks/UseAutoPopupDismiss";
 import useKeyboardEventsHandlers from "./hooks/UseKeyboardEventsHandlers";
 import useMouseEventsHandler from "./hooks/UseMouseEventsHandler";
 import { DropDownItemRef } from "./DropDownItem";
-import DropDownToolbar from "./DropDownToolbar";
+import DropDownToolbar from "./toolbar/DropDownToolbar";
 import DropDownNoOptionsFound from "./DropDownNoOptionsFound";
+import ToolbarOptionsModel from "./toolbar/ToolbarOptionsModel";
 
 const version = "14";
 const className = "demo-0014";
@@ -26,6 +27,8 @@ const DropDown0014ToolBar: React.FC = () => {
   const optionRefs = useRef<(DropDownItemRef | null)[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const [toolbarOptionsModel, SetToolbarOptionsModel] = useState<ToolbarOptionsModel>(new ToolbarOptionsModel());
 
   const setHeightLightIndex = useCallback((newIndex: number) => {
     if (highlightIndex.current === newIndex) {
@@ -45,6 +48,16 @@ const DropDown0014ToolBar: React.FC = () => {
     setListItems(customers);
   }, []);
 
+  useEffect(() => {
+    const showFavouritesOnly = toolbarOptionsModel.showFavouritesOnly;
+
+    if (showFavouritesOnly) {
+      setListItemsFiltered(listItems.filter((option) => option.favourite == true && option.text.toLowerCase().includes(searchTerm)));
+    } else {
+      setListItemsFiltered(listItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
+    }
+  }, [searchTerm, toolbarOptionsModel, listItems]);
+
   /**
    * handle text change event
    */
@@ -54,14 +67,16 @@ const DropDown0014ToolBar: React.FC = () => {
     }
     const filterValue = e.target.value;
     setSearchTerm(filterValue);
-    setListItemsFiltered(listItems.filter((option) => option.text.toLowerCase().includes(filterValue)));
     setHeightLightIndex(-1);
+  };
+
+  const handleToolBarOptionsChangedEvent = (value: ToolbarOptionsModel) => {
+    SetToolbarOptionsModel(value);
   };
 
   const handleOnFavouriteUpdatedEvent = (updatedItem: OptionApiModel) => {
     const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
     setListItems(updatedItems);
-    setListItemsFiltered(updatedItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
   };
 
   return (
@@ -70,7 +85,7 @@ const DropDown0014ToolBar: React.FC = () => {
         <input ref={inputRef} type="text" placeholder="Select an option..." value={searchTerm} onKeyDown={handleKeyDownEvent} onClick={handleInputBoxClickEvent} onChange={handleOnTextChangeEvent} />
         {isOpen && (
           <div className="ui-region-popup" ref={containerRef}>
-            <DropDownToolbar />
+            <DropDownToolbar value={toolbarOptionsModel} onChange={handleToolBarOptionsChangedEvent} />
             <div className="option-list-container">
               <DropDownNoOptionsFound listItemsFiltered={listItemsFiltered} />
               <DropDownList
