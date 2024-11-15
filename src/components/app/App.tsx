@@ -17,7 +17,7 @@ import DropDown0013FavouritesV2 from "../dropdowns/0013/DropDown0013FavouritesV2
 const App: React.FC = () => {
   return (
     <div className="demos-grid">
-      <DropDown0001Standard />
+      {/* <DropDown0001Standard />
       <DropDown0002Searchable />
       <DropDown0003Popup />
       <DropDown0004SubItems />
@@ -28,7 +28,7 @@ const App: React.FC = () => {
       <DropDown0009Dismiss />
       <DropDown0010CodeTidy />
       <DropDown0011RefinePopupEvents />
-      <DropDown0012Favorites />
+      <DropDown0012Favorites /> */}
       <DropDown0013FavouritesV2 />
     </div>
   );

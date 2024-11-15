@@ -1,74 +1,84 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import OptionApiModel from "../../../../models/OptionApiModel";
 import ConstantsKeyboard from "../../../constants/ConstantsKeyboard";
+import { DropDownItemRef } from "../DropDownItem";
 
 const useKeyboardEventsHandlers = (
   isOpen: boolean,
-  highlightIndex: number,
+  highlightIndex: React.MutableRefObject<number>,
+  setHighlightIndex: (index: number) => void,
   filteredOptions: OptionApiModel[],
-  setHighlightIndex: React.Dispatch<React.SetStateAction<number>>,
-  optionRefs: React.MutableRefObject<(HTMLDivElement | null)[]>,
+  optionRefs: React.MutableRefObject<(DropDownItemRef | null)[]>,
   containerRef: React.RefObject<HTMLDivElement>,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setValue: React.Dispatch<React.SetStateAction<OptionApiModel | null>>,
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>,
 ) => {
-  const calculatePageJump = useMemo(() => {
+  var pageJump = useRef<number>(0);
+
+  const calculatePageJump = () => {
     if (!containerRef.current || optionRefs.current.length === 0) return 1;
     const containerHeight = containerRef.current.clientHeight;
-    const averageItemHeight = optionRefs.current.reduce((sum, ref) => sum + (ref?.offsetHeight || 0), 0) / optionRefs.current.length;
-    return Math.floor(containerHeight / (averageItemHeight || 1));
-  }, [containerRef, optionRefs]);
+    const totalRowHeight = optionRefs.current.reduce((sum, ref) => sum + (ref?.offsetHeight || 0), 0);
+    const itemCount = filteredOptions.length;
+    const averageItemHeight = totalRowHeight / itemCount;
 
-  const adjustHighlightIndexWithDelta = useCallback(
-    (delta: number) => {
-      const minIndex = 0;
-      const maxIndex = filteredOptions.length - 1;
-      setHighlightIndex((prevIndex) => {
-        let newIndex = prevIndex + delta;
-        if (newIndex < minIndex) newIndex = minIndex;
-        if (newIndex > maxIndex) newIndex = maxIndex;
-        return newIndex;
-      });
-    },
-    [filteredOptions.length, setHighlightIndex],
-  );
+    const jump = Math.floor(containerHeight / (averageItemHeight || 1));
+    console.log(`container height:${containerHeight}  rowHeights:${totalRowHeight}  items:${itemCount}  avergeHeight:${averageItemHeight}   jump:${jump}`);
+    return jump;
+  };
 
-  const handleKeyDownEvent = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      switch (e.key) {
-        case ConstantsKeyboard.KEY_ARROW_DOWN:
-          e.preventDefault();
-          adjustHighlightIndexWithDelta(1);
-          break;
-        case ConstantsKeyboard.KEY_ARROW_UP:
-          e.preventDefault();
-          adjustHighlightIndexWithDelta(-1);
-          break;
-        case ConstantsKeyboard.KEY_PAGE_DOWN:
-          e.preventDefault();
-          adjustHighlightIndexWithDelta(calculatePageJump);
-          break;
-        case ConstantsKeyboard.KEY_PAGE_UP:
-          e.preventDefault();
-          adjustHighlightIndexWithDelta(-calculatePageJump);
-          break;
-        case ConstantsKeyboard.KEY_ENTER:
-          e.preventDefault();
-          if (isOpen && filteredOptions.length > 0) {
-            const item = filteredOptions[highlightIndex];
-            setValue(item);
-            setIsOpen(false);
-            setSearchTerm(item.text);
-          }
-          break;
-        case ConstantsKeyboard.KEY_ESCAPE:
+  useEffect(() => {
+    pageJump.current = calculatePageJump();
+  }, [filteredOptions, containerRef, optionRefs]);
+
+  const adjustHighlightIndexWithDelta = (delta: number) => {
+    const minIndex = 0;
+    const maxIndex = filteredOptions.length - 1;
+    let newIndex = highlightIndex.current + delta;
+    if (newIndex < minIndex) {
+      newIndex = minIndex;
+    }
+    if (newIndex > maxIndex) {
+      newIndex = maxIndex;
+    }
+    setHighlightIndex(newIndex);
+  };
+
+  const handleKeyDownEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (e.key) {
+      case ConstantsKeyboard.KEY_ARROW_DOWN:
+        e.preventDefault();
+        adjustHighlightIndexWithDelta(1);
+        break;
+      case ConstantsKeyboard.KEY_ARROW_UP:
+        e.preventDefault();
+        adjustHighlightIndexWithDelta(-1);
+        break;
+      case ConstantsKeyboard.KEY_PAGE_DOWN:
+        e.preventDefault();
+
+        adjustHighlightIndexWithDelta(pageJump.current);
+        break;
+      case ConstantsKeyboard.KEY_PAGE_UP:
+        e.preventDefault();
+
+        adjustHighlightIndexWithDelta(-pageJump.current);
+        break;
+      case ConstantsKeyboard.KEY_ENTER:
+        e.preventDefault();
+        if (isOpen && filteredOptions.length > 0) {
+          const item = filteredOptions[highlightIndex.current];
+          setValue(item);
           setIsOpen(false);
-          break;
-      }
-    },
-    [adjustHighlightIndexWithDelta, calculatePageJump, filteredOptions, highlightIndex, isOpen, setIsOpen, setValue, setSearchTerm],
-  );
+          setSearchTerm(item.text);
+        }
+        break;
+      case ConstantsKeyboard.KEY_ESCAPE:
+        setIsOpen(false);
+        break;
+    }
+  };
 
   return { handleKeyDownEvent };
 };

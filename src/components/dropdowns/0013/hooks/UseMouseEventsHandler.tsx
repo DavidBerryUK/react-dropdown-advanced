@@ -6,7 +6,6 @@ const useMouseEventsHandler = (
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setValue: React.Dispatch<React.SetStateAction<OptionApiModel | null>>,
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>,
-  setHighlightIndex: React.Dispatch<React.SetStateAction<number>>,
 ) => {
   const handleInputBoxClickEvent = useCallback(() => {
     setIsOpen(!isOpen);

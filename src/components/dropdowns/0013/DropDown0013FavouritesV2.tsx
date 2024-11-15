@@ -4,32 +4,41 @@ import DropDownList from "./DropDownList";
 import FactoryListData from "../../../factories/FactoryListData";
 import OptionApiModel from "../../../models/OptionApiModel";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import useAutoItemFocus from "./hooks/UseAutoItemFocus";
 import useAutoPopupDismiss from "./hooks/UseAutoPopupDismiss";
 import useKeyboardEventsHandlers from "./hooks/UseKeyboardEventsHandlers";
 import useMouseEventsHandler from "./hooks/UseMouseEventsHandler";
+import { DropDownItemRef } from "./DropDownItem";
 
 const version = "13";
 const className = "demo-0013";
 const title = "Favourites V2";
-const description = "Allow selection of favourites, was slow as re-renderd the entire list when highlighted index change, updated as to only refresh the affected cells";
+const description = "Allow selection of favourites, was slow as re-renderd the entire list when highlighted index change, use Imperative handles to manipulate components without re-rendering ";
 
 const DropDown0013FavouritesV2: React.FC = () => {
   const [listItems, setListItems] = useState<Array<OptionApiModel>>([]);
+  const [listItemsFiltered, setListItemsFiltered] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
 
   const [value, setValue] = useState<OptionApiModel | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [highlightIndex, setHighlightIndex] = useState(0);
-  const optionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const highlightIndex = useRef(0);
+  const optionRefs = useRef<(DropDownItemRef | null)[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [filteredOptions, setFilteredOptions] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
+
+  const setHeightLightIndex = useCallback((newIndex: number) => {
+    if (highlightIndex.current === newIndex) {
+      return;
+    }
+    optionRefs.current[highlightIndex.current]?.setRowHighlighted(false);
+    optionRefs.current[newIndex]?.setRowHighlighted(true);
+    highlightIndex.current = newIndex;
+  }, []);
 
   useAutoPopupDismiss(containerRef, inputRef, setIsOpen);
-  useAutoItemFocus(optionRefs, highlightIndex);
-  const { handleKeyDownEvent } = useKeyboardEventsHandlers(isOpen, highlightIndex, filteredOptions, setHighlightIndex, optionRefs, containerRef, setIsOpen, setValue, setSearchTerm);
-  const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setSearchTerm, setHighlightIndex);
+  const { handleKeyDownEvent } = useKeyboardEventsHandlers(isOpen, highlightIndex, setHeightLightIndex, listItemsFiltered, optionRefs, containerRef, setIsOpen, setValue, setSearchTerm);
+  const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setSearchTerm);
 
   useEffect(() => {
     const customers = FactoryListData.getCustomers();
@@ -44,7 +53,7 @@ const DropDown0013FavouritesV2: React.FC = () => {
 
     setSearchTerm(filterValue);
 
-    setFilteredOptions(listItems.filter((option) => option.text.toLowerCase().includes(filterValue)));
+    setListItemsFiltered(listItems.filter((option) => option.text.toLowerCase().includes(filterValue)));
 
     if (isOpen === false) {
       setIsOpen(true);
@@ -59,7 +68,7 @@ const DropDown0013FavouritesV2: React.FC = () => {
 
       // Update the filtered options to include the updated item
       setListItems(updatedItems);
-      setFilteredOptions(updatedItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
+      setListItemsFiltered(updatedItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
     },
     [listItems, searchTerm],
   );
@@ -74,7 +83,7 @@ const DropDown0013FavouritesV2: React.FC = () => {
               {/* {filteredOptions.length === 0 && <div>No options found</div>} */}
               {/* {filteredOptions.length > 0 && ( */}
               <DropDownList
-                filteredOptions={filteredOptions}
+                filteredOptions={listItemsFiltered}
                 optionRefs={optionRefs}
                 handleMouseOverEvent={handleMouseOverEvent}
                 handleOnFavouriteUpdatedEvent={handleOnFavouriteUpdatedEvent}
