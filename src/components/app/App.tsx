@@ -13,11 +13,12 @@ import DropDown0011RefinePopupEvents from "../dropdowns/0011/DropDown0011RefineP
 import DropDown0012Favorites from "../dropdowns/0012/DropDown0012Favourites";
 import React from "react";
 import DropDown0013FavouritesV2 from "../dropdowns/0013/DropDown0013FavouritesV2";
+import DropDown0014ToolBar from "../dropdowns/0014/DropDown0014Toolbar";
 
 const App: React.FC = () => {
   return (
     <div className="demos-grid">
-      {/* <DropDown0001Standard />
+      <DropDown0001Standard />
       <DropDown0002Searchable />
       <DropDown0003Popup />
       <DropDown0004SubItems />
@@ -28,8 +29,9 @@ const App: React.FC = () => {
       <DropDown0009Dismiss />
       <DropDown0010CodeTidy />
       <DropDown0011RefinePopupEvents />
-      <DropDown0012Favorites /> */}
+      <DropDown0012Favorites />
       <DropDown0013FavouritesV2 />
+      <DropDown0014ToolBar />
     </div>
   );
 };

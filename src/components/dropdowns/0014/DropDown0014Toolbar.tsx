@@ -8,20 +8,20 @@ import useAutoPopupDismiss from "./hooks/UseAutoPopupDismiss";
 import useKeyboardEventsHandlers from "./hooks/UseKeyboardEventsHandlers";
 import useMouseEventsHandler from "./hooks/UseMouseEventsHandler";
 import { DropDownItemRef } from "./DropDownItem";
+import DropDownToolbar from "./DropDownToolbar";
+import DropDownNoOptionsFound from "./DropDownNoOptionsFound";
 
-const version = "13";
-const className = "demo-0013";
-const title = "Favourites V2";
-const description = "Allow selection of favourites, was slow as re-renderd the entire list when highlighted index change, use Imperative handles to manipulate components without re-rendering ";
+const version = "14";
+const className = "demo-0014";
+const title = "Toolbar";
+const description = "Improve drop down layout, add a toolbar, re-enable mouse hover over";
 
-const DropDown0013FavouritesV2: React.FC = () => {
+const DropDown0014ToolBar: React.FC = () => {
   const [listItems, setListItems] = useState<Array<OptionApiModel>>([]);
   const [listItemsFiltered, setListItemsFiltered] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
-
   const [value, setValue] = useState<OptionApiModel | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
   const highlightIndex = useRef(0);
   const optionRefs = useRef<(DropDownItemRef | null)[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,7 +38,7 @@ const DropDown0013FavouritesV2: React.FC = () => {
 
   useAutoPopupDismiss(containerRef, inputRef, setIsOpen);
   const { handleKeyDownEvent } = useKeyboardEventsHandlers(isOpen, highlightIndex, setHeightLightIndex, listItemsFiltered, optionRefs, containerRef, setIsOpen, setValue, setSearchTerm);
-  const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setSearchTerm);
+  const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setHeightLightIndex, setSearchTerm);
 
   useEffect(() => {
     const customers = FactoryListData.getCustomers();
@@ -52,26 +52,17 @@ const DropDown0013FavouritesV2: React.FC = () => {
     if (isOpen === false) {
       setIsOpen(true);
     }
-
     const filterValue = e.target.value;
-
     setSearchTerm(filterValue);
     setListItemsFiltered(listItems.filter((option) => option.text.toLowerCase().includes(filterValue)));
     setHeightLightIndex(-1);
   };
 
-  const handleOnFavouriteUpdatedEvent = useCallback(
-    (updatedItem: OptionApiModel) => {
-      console.log(`Updating item ${updatedItem.text} : ${updatedItem.favourite}`);
-      // Update the listItems array with the updated item
-      const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
-
-      // Update the filtered options to include the updated item
-      setListItems(updatedItems);
-      setListItemsFiltered(updatedItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
-    },
-    [listItems, searchTerm],
-  );
+  const handleOnFavouriteUpdatedEvent = (updatedItem: OptionApiModel) => {
+    const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
+    setListItems(updatedItems);
+    setListItemsFiltered(updatedItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
+  };
 
   return (
     <DemoContainer className={className} version={version} title={title} description={description}>
@@ -79,17 +70,16 @@ const DropDown0013FavouritesV2: React.FC = () => {
         <input ref={inputRef} type="text" placeholder="Select an option..." value={searchTerm} onKeyDown={handleKeyDownEvent} onClick={handleInputBoxClickEvent} onChange={handleOnTextChangeEvent} />
         {isOpen && (
           <div className="ui-region-popup" ref={containerRef}>
+            <DropDownToolbar />
             <div className="option-list-container">
-              {listItemsFiltered.length === 0 && <div>No options found</div>}
-              {listItemsFiltered.length > 0 && (
-                <DropDownList
-                  filteredOptions={listItemsFiltered}
-                  optionRefs={optionRefs}
-                  handleMouseOverEvent={handleMouseOverEvent}
-                  handleOnFavouriteUpdatedEvent={handleOnFavouriteUpdatedEvent}
-                  handleOnOptionSelectedEvent={handleOnOptionSelectedEvent}
-                />
-              )}
+              <DropDownNoOptionsFound listItemsFiltered={listItemsFiltered} />
+              <DropDownList
+                filteredOptions={listItemsFiltered}
+                optionRefs={optionRefs}
+                handleMouseOverEvent={handleMouseOverEvent}
+                handleOnFavouriteUpdatedEvent={handleOnFavouriteUpdatedEvent}
+                handleOnOptionSelectedEvent={handleOnOptionSelectedEvent}
+              />
             </div>
           </div>
         )}
@@ -98,4 +88,4 @@ const DropDown0013FavouritesV2: React.FC = () => {
   );
 };
 
-export default DropDown0013FavouritesV2;
+export default DropDown0014ToolBar;

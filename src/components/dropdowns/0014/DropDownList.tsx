@@ -11,6 +11,10 @@ interface IProperties {
 }
 
 const DropDownList: React.FC<IProperties> = ({ optionRefs, filteredOptions, handleOnFavouriteUpdatedEvent, handleOnOptionSelectedEvent, handleMouseOverEvent }) => {
+  if (filteredOptions.length === 0) {
+    return null;
+  }
+
   return (
     <>
       {filteredOptions.map((option, index) => {

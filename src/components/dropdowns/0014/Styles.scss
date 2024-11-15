@@ -1,0 +1,91 @@
+.demo-0014 {
+
+  $border-colour:#95a5a5;
+  
+  $text-border-radius:4px;
+  $popup-border-radius:10px;
+
+
+  $background-colour:#fff;
+  $popup-height-max:350px;
+
+  .ui-dropdown {
+
+    position: relative;
+
+    input {
+      position: relative;
+      display: block;
+      padding: 8px;
+      border-radius: $text-border-radius;
+      border: solid 1px $border-colour;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: $background-colour;
+    }
+
+    .ui-region-popup {
+      position: absolute;
+      box-sizing: border-box;
+      width: 100%;
+      top: 36px;
+      left: 0px;
+      border-radius: $popup-border-radius;
+      border: solid 1px $border-colour;
+      background-color: $background-colour;
+      //max-height: $popup-height-max;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      padding-top: 6
+      px;
+      padding-bottom: 4px;
+    
+      /* Use flex layout for vertical alignment */
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .option-list-toolbar {
+      height: 40px;
+      box-sizing: border-box;
+      width: 100%;
+      border: solid 1px blue;
+      /* Prevent shrinking */
+      flex-shrink: 0;
+    }
+    
+    .option-list-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      margin-left: 4px;
+      margin-right: 4px;
+    
+      /* Allow dynamic resizing up to a maximum height */
+      flex-grow: 1;
+      max-height: $popup-height-max;
+    }
+
+    
+    .option-item {
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      gap: 6px;
+      border-radius: 3px;
+      cursor: pointer;
+      user-select: none;
+      &.highlighted {
+        background-color: darken($color: $background-colour, $amount: 10);                
+      }
+
+      .favourite {
+        width: 30px !important;
+        height: 30px !important;
+        flex-shrink: 0;
+      }
+
+      
+    }
+  }
+}
