@@ -1,4 +1,4 @@
-import "./styles/Styles.scss";
+import "../../styles/Styles.scss";
 import DropDown0001Standard from "../dropdowns/0001/DropDown0001Standard";
 import DropDown0002Searchable from "../dropdowns/0002/DropDown0002Searchable";
 import DropDown0003Popup from "../dropdowns/0003/DropDown0003Popup";
@@ -17,22 +17,28 @@ import DropDown0015MultiSelect from "../dropdowns/0015/DropDown0015MultiSelect";
 import React from "react";
 
 const App: React.FC = () => {
+  const showHistoric = false;
+
   return (
     <div className="demos-grid">
-      <DropDown0001Standard />
-      <DropDown0002Searchable />
-      <DropDown0003Popup />
-      <DropDown0004SubItems />
-      <DropDown0005UpDownKeys />
-      <DropDown0006KeepFocus />
-      <DropDown0007PageUpDown />
-      <DropDown0008SelectItem />
-      <DropDown0009Dismiss />
-      <DropDown0010CodeTidy />
-      <DropDown0011RefinePopupEvents />
-      <DropDown0012Favorites />
-      <DropDown0013FavoritesV2 />
-      <DropDown0014ToolBar />
+      {showHistoric && (
+        <>
+          <DropDown0001Standard />
+          <DropDown0002Searchable />
+          <DropDown0003Popup />
+          <DropDown0004SubItems />
+          <DropDown0005UpDownKeys />
+          <DropDown0006KeepFocus />
+          <DropDown0007PageUpDown />
+          <DropDown0008SelectItem />
+          <DropDown0009Dismiss />
+          <DropDown0010CodeTidy />
+          <DropDown0011RefinePopupEvents />
+          <DropDown0012Favorites />
+          <DropDown0013FavoritesV2 />
+          <DropDown0014ToolBar />
+        </>
+      )}
       <DropDown0015MultiSelect />
     </div>
   );

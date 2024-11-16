@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useImperativeHandle, forwardRef, useRef } from "react";
 import OptionApiModel from "../../../models/OptionApiModel";
-import UIIconStarSolid from "../../icons/UIIconStarSolid";
-import UIIconStar from "../../icons/UIIconStar";
+import UIIconStarSolid from "../../ui/icons/UIIconStarSolid";
+import UIIconStar from "../../ui/icons/UIIconStar";
 
 interface IProperties {
   index: number;

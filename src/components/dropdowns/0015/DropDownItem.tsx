@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useImperativeHandle, forwardRef, useRef } from "react";
 import OptionApiModel from "../../../models/OptionApiModel";
-import UIIconStarSolid from "../../icons/UIIconStarSolid";
-import UIIconStar from "../../icons/UIIconStar";
-import UIIconTick from "../../icons/UIIconTick";
-import UIIconCircle from "../../icons/UIIconCircle";
+import UISwitchTickBox from "../../ui/UISwitches/UISwitchTickBox";
+import UISwitchFavorite from "../../ui/UISwitches/UISwitchFavorite";
 
 interface IProperties {
   index: number;
@@ -66,9 +64,12 @@ const DropDownItem = React.memo(
     /**
      * Toggle a user-favorite item from the list
      */
-    const handleFavoriteClickEvent = (event: React.MouseEvent<HTMLElement>) => {
-      event.stopPropagation();
-      onFavoriteUpdated(item.cloneWithFavorite(!item.favorite));
+    const handleFavoriteOnChangeEvent = (value: boolean) => {
+      onFavoriteUpdated(item.cloneWithFavorite(value));
+    };
+
+    const handleOnBoxOnChangeEvent = (value: boolean) => {
+      onFavoriteUpdated(item.cloneWithSelected(value));
     };
 
     // Combine the local ref and the custom method in the exposed ref
@@ -79,12 +80,12 @@ const DropDownItem = React.memo(
 
     return (
       <div ref={localRef} className={className} onClick={handleOnClickEvent} onMouseOver={handleMouseOverEvent}>
-        <div className="col-favorite" onClick={handleFavoriteClickEvent}>
-          {item.favorite ? <UIIconStarSolid /> : <UIIconStar />}
+        <div className="col-favorite">
+          <UISwitchFavorite value={item.favorite} onChanged={handleFavoriteOnChangeEvent} />
         </div>
         <div className="col-text">{item.text}</div>
         <div className="col-tick">
-          <UIIconCircle />
+          <UISwitchTickBox value={item.selected} onChanged={handleOnBoxOnChangeEvent} />
         </div>
       </div>
     );

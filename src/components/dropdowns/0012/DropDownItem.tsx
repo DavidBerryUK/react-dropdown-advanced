@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import OptionApiModel from "../../../models/OptionApiModel";
-import UIIconStar from "../../icons/UIIconStar";
-import UIIconStarSolid from "../../icons/UIIconStarSolid";
+import UIIconStarSolid from "../../ui/icons/UIIconStarSolid";
+import UIIconStar from "../../ui/icons/UIIconStar";
 
 interface IProperties {
   index: number;

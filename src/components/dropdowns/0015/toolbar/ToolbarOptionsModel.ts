@@ -1,14 +1,10 @@
 export default class ToolbarOptionsModel {
   showFavoritesOnly: boolean = false;
+  showSelectedOnly: boolean = false;
 
-  /**
-   * Basic Clone
-   * @returns
-   */
-  clone(): ToolbarOptionsModel {
-    var model = new ToolbarOptionsModel();
-    model.showFavoritesOnly = this.showFavoritesOnly;
-    return model;
+  constructor(showFavoritesOnly?: boolean, showSelectedOnly?: boolean) {
+    this.showFavoritesOnly = showFavoritesOnly ?? false;
+    this.showSelectedOnly = showSelectedOnly ?? false;
   }
 
   /**
@@ -17,8 +13,12 @@ export default class ToolbarOptionsModel {
    * @returns
    */
   cloneWithFavoritesOnly(showFavoritesOnly: boolean): ToolbarOptionsModel {
-    var model = new ToolbarOptionsModel();
-    model.showFavoritesOnly = showFavoritesOnly;
+    var model = new ToolbarOptionsModel(showFavoritesOnly, this.showSelectedOnly);
+    return model;
+  }
+
+  cloneWithShowSelectedOnly(showSelectedOnly: boolean): ToolbarOptionsModel {
+    var model = new ToolbarOptionsModel(this.showFavoritesOnly, showSelectedOnly);
     return model;
   }
 }

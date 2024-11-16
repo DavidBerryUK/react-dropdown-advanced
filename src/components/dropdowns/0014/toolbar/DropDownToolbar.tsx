@@ -1,6 +1,6 @@
 import React from "react";
 import ToolbarOptionsModel from "./ToolbarOptionsModel";
-import UIButtonToggleStar from "../../../ui/buttonToggleStar/UIButtonToggleStar";
+import UISwitchFavourite from "../../../ui/UISwitches/UISwitchFavorite";
 
 interface IProperties {
   value: ToolbarOptionsModel;
@@ -17,7 +17,7 @@ const DropDownToolbar: React.FC<IProperties> = ({ value, onChange }) => {
 
   return (
     <div className="option-list-toolbar" title="Show only favorite items">
-      <UIButtonToggleStar showFavoritesOnly={value.showFavoritesOnly} onShowFavoritesOnlyChanged={handleOnShowFavoritesOnlyChangedEvent} />
+      <UISwitchFavourite value={value.showFavoritesOnly} onChanged={handleOnShowFavoritesOnlyChangedEvent} />
     </div>
   );
 };

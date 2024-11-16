@@ -30,7 +30,7 @@ const DropDown0015MultiSelect: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [toolbarOptionsModel, SetToolbarOptionsModel] = useState<ToolbarOptionsModel>(new ToolbarOptionsModel());
+  const [toolbarOptionsModel, setToolbarOptionsModel] = useState<ToolbarOptionsModel>(new ToolbarOptionsModel());
 
   const setHeightLightIndex = useCallback((newIndex: number) => {
     if (highlightIndex.current === newIndex) {
@@ -49,17 +49,30 @@ const DropDown0015MultiSelect: React.FC = () => {
     const customers = FactoryListData.getCustomers();
     setListItems(customers);
   }, []);
-
   useEffect(() => {
-    const showFavoritesOnly = toolbarOptionsModel.showFavoritesOnly;
+    const { showFavoritesOnly, showSelectedOnly } = toolbarOptionsModel;
 
-    if (showFavoritesOnly) {
-      setListItemsFiltered(listItems.filter((option) => option.favorite === true && option.text.toLowerCase().includes(searchTerm)));
-    } else {
-      setListItemsFiltered(listItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
+    if (!showFavoritesOnly && !showSelectedOnly) {
+      if (searchTerm.length === 0) {
+        // No filters and no search term, return the entire list
+        setListItemsFiltered(listItems);
+      } else {
+        // No filters, but search term is present, filter by search term
+        setListItemsFiltered(listItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
+      }
+      return;
     }
-  }, [searchTerm, toolbarOptionsModel, listItems]);
 
+    // At least one filter is active
+    setListItemsFiltered(
+      listItems.filter((option) => {
+        const matchesSearch = option.text.toLowerCase().includes(searchTerm);
+        const matchesFilter = (showFavoritesOnly && option.favorite) || (showSelectedOnly && option.selected);
+
+        return matchesFilter && matchesSearch;
+      }),
+    );
+  }, [searchTerm, toolbarOptionsModel, listItems]);
   /**
    * handle text change event
    */
@@ -73,12 +86,41 @@ const DropDown0015MultiSelect: React.FC = () => {
   };
 
   const handleToolBarOptionsChangedEvent = (value: ToolbarOptionsModel) => {
-    SetToolbarOptionsModel(value);
+    setToolbarOptionsModel(value);
   };
 
   const handleOnFavoriteUpdatedEvent = (updatedItem: OptionApiModel) => {
     const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
     setListItems(updatedItems);
+  };
+
+  /**
+   * go though all items and change to select none
+   */
+  const handleOnSelectNoneEvent = () => {
+    const updatedListItems = listItems.map(
+      (item) => (item.selected ? item.cloneWithSelected(false) : item), // Only update items where selected is true
+    );
+
+    setListItems(updatedListItems);
+  };
+
+  /**
+   * go though all VISIBLE items and select them
+   */
+  const handleOnSelectAllEvent = () => {
+    // Update only the items where `isSelected` is currently false
+    const updatedFilteredItems = listItemsFiltered
+      .filter((item) => !item.selected) // Only process items that are not selected
+      .map((item) => item.cloneWithSelected(true)); // Clone with `selected` set to true
+
+    const updatedListItems = listItems.map((item) => {
+      // Check if the item is in the filtered list that needs updating
+      const matchingItem = updatedFilteredItems.find((filteredItem) => filteredItem.code === item.code);
+      return matchingItem ? matchingItem : item; // Update if found, otherwise keep the original
+    });
+
+    setListItems(updatedListItems);
   };
 
   return (
@@ -87,7 +129,7 @@ const DropDown0015MultiSelect: React.FC = () => {
         <input ref={inputRef} type="text" placeholder="Select an option..." value={searchTerm} onKeyDown={handleKeyDownEvent} onClick={handleInputBoxClickEvent} onChange={handleOnTextChangeEvent} />
         {isOpen && (
           <div className="ui-region-popup" ref={containerRef}>
-            <DropDownToolbar value={toolbarOptionsModel} onChange={handleToolBarOptionsChangedEvent} />
+            <DropDownToolbar value={toolbarOptionsModel} onChange={handleToolBarOptionsChangedEvent} onSelectAll={handleOnSelectAllEvent} onSelectNone={handleOnSelectNoneEvent} />
             <div className="option-list-container">
               <DropDownNoOptionsFound listItemsFiltered={listItemsFiltered} />
               <DropDownList

@@ -44,6 +44,8 @@
 
     .option-list-toolbar {
       position: relative;
+      display: flex;
+      justify-content: space-around;
       height: 40px;
       box-sizing: border-box;
       background-color: #eee;
@@ -54,6 +56,8 @@
       margin-left: 4px;
       margin-right: 4px;
       padding-left: 4px;
+      padding-top: 2px;
+      padding-bottom: 2px;
       /* Prevent shrinking */
       flex-shrink: 0;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 4px;
@@ -64,6 +68,7 @@
       display: flex;
       flex-direction: column;
       overflow-y: auto;
+      overflow-x: hidden;
       margin-left: 4px;
       margin-right: 4px;
 
