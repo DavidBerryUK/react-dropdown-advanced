@@ -12,12 +12,12 @@ import DropDownToolbar from "./toolbar/DropDownToolbar";
 import DropDownNoOptionsFound from "./DropDownNoOptionsFound";
 import ToolbarOptionsModel from "./toolbar/ToolbarOptionsModel";
 
-const version = "14";
-const className = "demo-0014";
+const version = "15";
+const className = "demo-0015";
 const title = "Toolbar";
-const description = "Improve drop down layout, add a toolbar, re-enable mouse hover over";
+const description = "Multi Select Rows, allow wider dropdown";
 
-const DropDown0014ToolBar: React.FC = () => {
+const DropDown0015MultiSelect: React.FC = () => {
   const [listItems, setListItems] = useState<Array<OptionApiModel>>([]);
   const [listItemsFiltered, setListItemsFiltered] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
   const [value, setValue] = useState<OptionApiModel | null>(null);
@@ -103,4 +103,4 @@ const DropDown0014ToolBar: React.FC = () => {
   );
 };
 
-export default DropDown0014ToolBar;
+export default DropDown0015MultiSelect;
