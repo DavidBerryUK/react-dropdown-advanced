@@ -12,12 +12,12 @@ import DropDownToolbar from "./toolbar/DropDownToolbar";
 import DropDownNoOptionsFound from "./DropDownNoOptionsFound";
 import ToolbarOptionsModel from "./toolbar/ToolbarOptionsModel";
 
-const version = "15";
-const className = "demo-0015";
-const title = "Multi Select";
-const description = "Multi Select Rows, select all, select none, show selected only. This is getting slow again and needs optimisation.";
+const version = "16";
+const className = "demo-0016";
+const title = "Optimise";
+const description = "Optimise, snappier UI feedback";
 
-const DropDown0015MultiSelect: React.FC = () => {
+const DropDown0016Optimise: React.FC = () => {
   const [listItems, setListItems] = useState<Array<OptionApiModel>>([]);
   const [listItemsFiltered, setListItemsFiltered] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
 
@@ -147,4 +147,4 @@ const DropDown0015MultiSelect: React.FC = () => {
   );
 };
 
-export default DropDown0015MultiSelect;
+export default DropDown0016Optimise;

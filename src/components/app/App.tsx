@@ -14,6 +14,7 @@ import DropDown0012Favorites from "../dropdowns/0012/DropDown0012Favorites";
 import DropDown0013FavoritesV2 from "../dropdowns/0013/DropDown0013FavoritesV2";
 import DropDown0014ToolBar from "../dropdowns/0014/DropDown0014Toolbar";
 import DropDown0015MultiSelect from "../dropdowns/0015/DropDown0015MultiSelect";
+import DropDown0016Optimise from "../dropdowns/0016/DropDown0016Optimise";
 import React from "react";
 
 const App: React.FC = () => {
@@ -40,6 +41,7 @@ const App: React.FC = () => {
         </>
       )}
       <DropDown0015MultiSelect />
+      <DropDown0016Optimise />
     </div>
   );
 };
