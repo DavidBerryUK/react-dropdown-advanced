@@ -10,11 +10,12 @@ import DropDown0008SelectItem from "../dropdowns/0008/DropDown0008SelectItem";
 import DropDown0009Dismiss from "../dropdowns/0009/DropDown0009Dismiss";
 import DropDown0010CodeTidy from "../dropdowns/0010/DropDown0010CodeTidy";
 import DropDown0011RefinePopupEvents from "../dropdowns/0011/DropDown0011RefinePopupEvents";
-import DropDown0012Favorites from "../dropdowns/0012/DropDown0012Favourites";
+
 import React from "react";
-import DropDown0013FavouritesV2 from "../dropdowns/0013/DropDown0013FavouritesV2";
+import DropDown0013FavoritesV2 from "../dropdowns/0013/DropDown0013FavoritesV2";
 import DropDown0014ToolBar from "../dropdowns/0014/DropDown0014Toolbar";
 import DropDown0015MultiSelect from "../dropdowns/0015/DropDown0015MultiSelect";
+import DropDown0012Favorites from "../dropdowns/0012/DropDown0012Favorites";
 
 const App: React.FC = () => {
   return (
@@ -31,7 +32,7 @@ const App: React.FC = () => {
       <DropDown0010CodeTidy />
       <DropDown0011RefinePopupEvents />
       <DropDown0012Favorites />
-      <DropDown0013FavouritesV2 />
+      <DropDown0013FavoritesV2 />
       <DropDown0014ToolBar />
       <DropDown0015MultiSelect />
     </div>

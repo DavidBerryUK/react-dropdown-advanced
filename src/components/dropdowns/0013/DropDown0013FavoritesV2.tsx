@@ -11,13 +11,14 @@ import { DropDownItemRef } from "./DropDownItem";
 
 const version = "13";
 const className = "demo-0013";
-const title = "Favourites V2";
-const description = "Allow selection of favourites, was slow as re-renderd the entire list when highlighted index change, use Imperative handles to manipulate components without re-rendering ";
+const title = "Favorites V2";
+const description = "Allow selection of favorites, was slow as re-rendered the entire list when highlighted index change, use Imperative handles to manipulate components without re-rendering ";
 
-const DropDown0013FavouritesV2: React.FC = () => {
+const DropDown0013FavoritesV2: React.FC = () => {
   const [listItems, setListItems] = useState<Array<OptionApiModel>>([]);
   const [listItemsFiltered, setListItemsFiltered] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [value, setValue] = useState<OptionApiModel | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -60,9 +61,9 @@ const DropDown0013FavouritesV2: React.FC = () => {
     setHeightLightIndex(-1);
   };
 
-  const handleOnFavouriteUpdatedEvent = useCallback(
+  const handleOnFavoriteUpdatedEvent = useCallback(
     (updatedItem: OptionApiModel) => {
-      console.log(`Updating item ${updatedItem.text} : ${updatedItem.favourite}`);
+      console.log(`Updating item ${updatedItem.text} : ${updatedItem.favorite}`);
       // Update the listItems array with the updated item
       const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
 
@@ -86,7 +87,7 @@ const DropDown0013FavouritesV2: React.FC = () => {
                   filteredOptions={listItemsFiltered}
                   optionRefs={optionRefs}
                   handleMouseOverEvent={handleMouseOverEvent}
-                  handleOnFavouriteUpdatedEvent={handleOnFavouriteUpdatedEvent}
+                  handleOnFavoriteUpdatedEvent={handleOnFavoriteUpdatedEvent}
                   handleOnOptionSelectedEvent={handleOnOptionSelectedEvent}
                 />
               )}
@@ -98,4 +99,4 @@ const DropDown0013FavouritesV2: React.FC = () => {
   );
 };
 
-export default DropDown0013FavouritesV2;
+export default DropDown0013FavoritesV2;

@@ -1,12 +1,10 @@
 .demo-0013 {
-
-  $border-colour:#95a5a5;
-  $border-radius:6px;
-  $background-colour:#fff;
-  $popup-height-max:300px;
+  $border-colour: #95a5a5;
+  $border-radius: 6px;
+  $background-colour: #fff;
+  $popup-height-max: 300px;
 
   .ui-dropdown {
-
     position: relative;
 
     input {
@@ -33,10 +31,9 @@
       padding: 4px;
     }
 
-    .option-list-container {      
+    .option-list-container {
       display: flex;
-      flex-direction: column;      
-            
+      flex-direction: column;
     }
 
     .option-item {
@@ -48,16 +45,14 @@
       cursor: pointer;
       user-select: none;
       &.highlighted {
-        background-color: darken($color: $background-colour, $amount: 10);                
+        background-color: darken($color: $background-colour, $amount: 10);
       }
 
-      .favourite {
+      .favorite {
         width: 30px !important;
         height: 30px !important;
         flex-shrink: 0;
       }
-
-      
     }
   }
 }

@@ -14,12 +14,14 @@ import ToolbarOptionsModel from "./toolbar/ToolbarOptionsModel";
 
 const version = "15";
 const className = "demo-0015";
-const title = "Toolbar";
+const title = "Multi Select";
 const description = "Multi Select Rows, allow wider dropdown";
 
 const DropDown0015MultiSelect: React.FC = () => {
   const [listItems, setListItems] = useState<Array<OptionApiModel>>([]);
   const [listItemsFiltered, setListItemsFiltered] = useState<Array<OptionApiModel>>(new Array<OptionApiModel>());
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [value, setValue] = useState<OptionApiModel | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -49,10 +51,10 @@ const DropDown0015MultiSelect: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const showFavouritesOnly = toolbarOptionsModel.showFavouritesOnly;
+    const showFavoritesOnly = toolbarOptionsModel.showFavoritesOnly;
 
-    if (showFavouritesOnly) {
-      setListItemsFiltered(listItems.filter((option) => option.favourite === true && option.text.toLowerCase().includes(searchTerm)));
+    if (showFavoritesOnly) {
+      setListItemsFiltered(listItems.filter((option) => option.favorite === true && option.text.toLowerCase().includes(searchTerm)));
     } else {
       setListItemsFiltered(listItems.filter((option) => option.text.toLowerCase().includes(searchTerm)));
     }
@@ -74,7 +76,7 @@ const DropDown0015MultiSelect: React.FC = () => {
     SetToolbarOptionsModel(value);
   };
 
-  const handleOnFavouriteUpdatedEvent = (updatedItem: OptionApiModel) => {
+  const handleOnFavoriteUpdatedEvent = (updatedItem: OptionApiModel) => {
     const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
     setListItems(updatedItems);
   };
@@ -92,7 +94,7 @@ const DropDown0015MultiSelect: React.FC = () => {
                 filteredOptions={listItemsFiltered}
                 optionRefs={optionRefs}
                 handleMouseOverEvent={handleMouseOverEvent}
-                handleOnFavouriteUpdatedEvent={handleOnFavouriteUpdatedEvent}
+                handleOnFavoriteUpdatedEvent={handleOnFavoriteUpdatedEvent}
                 handleOnOptionSelectedEvent={handleOnOptionSelectedEvent}
               />
             </div>

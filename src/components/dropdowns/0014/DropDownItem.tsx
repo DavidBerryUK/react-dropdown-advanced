@@ -6,7 +6,7 @@ import UIIconStar from "../../icons/UIIconStar";
 interface IProperties {
   index: number;
   item: OptionApiModel;
-  onFavouriteUpdated: (item: OptionApiModel) => void;
+  onFavoriteUpdated: (item: OptionApiModel) => void;
   onSelected: (item: OptionApiModel, index: number) => void;
   onMouseOver: (item: OptionApiModel, index: number) => void;
 }
@@ -17,7 +17,7 @@ export type DropDownItemRef = {
 } & Pick<HTMLDivElement, "offsetHeight">;
 
 const DropDownItem = React.memo(
-  forwardRef<DropDownItemRef, IProperties>(({ index, item, onSelected, onMouseOver, onFavouriteUpdated }, ref) => {
+  forwardRef<DropDownItemRef, IProperties>(({ index, item, onSelected, onMouseOver, onFavoriteUpdated }, ref) => {
     const localRef = useRef<HTMLDivElement>(null); // Internal ref to access HTMLDivElement
     const [className, setClassName] = useState("option-item");
 
@@ -62,11 +62,11 @@ const DropDownItem = React.memo(
     };
 
     /**
-     * Toggle a user-favorited item from the list
+     * Toggle a user-favorite item from the list
      */
-    const handleFavouriteClickEvent = (event: React.MouseEvent<HTMLElement>) => {
+    const handleFavoriteClickEvent = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
-      onFavouriteUpdated(item.cloneWithFavourite(!item.favourite));
+      onFavoriteUpdated(item.cloneWithFavorite(!item.favorite));
     };
 
     // Combine the local ref and the custom method in the exposed ref
@@ -77,8 +77,8 @@ const DropDownItem = React.memo(
 
     return (
       <div ref={localRef} className={className} onClick={handleOnClickEvent} onMouseOver={handleMouseOverEvent}>
-        <div className="favourite" onClick={handleFavouriteClickEvent}>
-          {item.favourite ? <UIIconStarSolid /> : <UIIconStar />}
+        <div className="favorite" onClick={handleFavoriteClickEvent}>
+          {item.favorite ? <UIIconStarSolid /> : <UIIconStar />}
         </div>
         <div className="text">{item.text}</div>
       </div>

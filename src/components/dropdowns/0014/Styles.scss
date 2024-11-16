@@ -1,16 +1,13 @@
 .demo-0014 {
+  $border-colour: #95a5a5;
 
-  $border-colour:#95a5a5;
-  
-  $text-border-radius:4px;
-  $popup-border-radius:10px;
+  $text-border-radius: 4px;
+  $popup-border-radius: 10px;
 
-
-  $background-colour:#fff;
-  $popup-height-max:350px;
+  $background-colour: #fff;
+  $popup-height-max: 350px;
 
   .ui-dropdown {
-
     position: relative;
 
     input {
@@ -35,26 +32,25 @@
       background-color: $background-colour;
       //max-height: $popup-height-max;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-      padding-top: 6
-      px;
+      padding-top: 6 px;
       padding-bottom: 4px;
-    
+
       /* Use flex layout for vertical alignment */
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: center;
     }
-    
+
     .option-list-toolbar {
       position: relative;
       height: 40px;
-      box-sizing: border-box;      
-      background-color: #eee;      
-      border:solid 1px #e5e5e5;
+      box-sizing: border-box;
+      background-color: #eee;
+      border: solid 1px #e5e5e5;
       border-radius: 4px;
-      margin-top: 4px;  
-      margin-bottom: 6px;    
+      margin-top: 4px;
+      margin-bottom: 6px;
       margin-left: 4px;
       margin-right: 4px;
       padding-left: 4px;
@@ -62,7 +58,7 @@
       flex-shrink: 0;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 4px;
     }
-    
+
     .option-list-container {
       position: relative;
       display: flex;
@@ -70,13 +66,12 @@
       overflow-y: auto;
       margin-left: 4px;
       margin-right: 4px;
-      
+
       /* Allow dynamic resizing up to a maximum height */
       flex-grow: 1;
       max-height: $popup-height-max;
     }
 
-    
     .option-item {
       display: flex;
       align-items: center;
@@ -86,16 +81,14 @@
       cursor: pointer;
       user-select: none;
       &.highlighted {
-        background-color: darken($color: $background-colour, $amount: 10);                
+        background-color: darken($color: $background-colour, $amount: 10);
       }
 
-      .favourite {
+      .favorite {
         width: 30px !important;
         height: 30px !important;
         flex-shrink: 0;
       }
-
-      
     }
   }
 }

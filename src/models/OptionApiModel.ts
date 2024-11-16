@@ -1,19 +1,19 @@
 export default class OptionApiModel {
   code: string;
   text: string;
-  favourite: boolean;
+  favorite: boolean;
 
-  constructor(code: string, text: string, favourite?: boolean) {
+  constructor(code: string, text: string, favorite?: boolean) {
     this.code = code;
     this.text = text;
-    this.favourite = favourite ?? false;
+    this.favorite = favorite ?? false;
   }
 
   clone(): OptionApiModel {
-    return new OptionApiModel(this.code, this.text, this.favourite);
+    return new OptionApiModel(this.code, this.text, this.favorite);
   }
 
-  cloneWithFavourite(favourite: boolean): OptionApiModel {
-    return new OptionApiModel(this.code, this.text, favourite);
+  cloneWithFavorite(favorite: boolean): OptionApiModel {
+    return new OptionApiModel(this.code, this.text, favorite);
   }
 }

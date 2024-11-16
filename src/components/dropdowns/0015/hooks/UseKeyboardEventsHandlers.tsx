@@ -30,6 +30,7 @@ const useKeyboardEventsHandlers = (
 
   useEffect(() => {
     pageJump.current = calculatePageJump();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredOptions, containerRef, optionRefs]);
 
   const adjustHighlightIndexWithDelta = (delta: number) => {

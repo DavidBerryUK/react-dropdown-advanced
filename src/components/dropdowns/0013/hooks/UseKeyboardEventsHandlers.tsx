@@ -24,12 +24,13 @@ const useKeyboardEventsHandlers = (
     const averageItemHeight = totalRowHeight / itemCount;
 
     const jump = Math.floor(containerHeight / (averageItemHeight || 1));
-    console.log(`container height:${containerHeight}  rowHeights:${totalRowHeight}  items:${itemCount}  avergeHeight:${averageItemHeight}   jump:${jump}`);
+    console.log(`container height:${containerHeight}  rowHeights:${totalRowHeight}  items:${itemCount}  averageHeight:${averageItemHeight}   jump:${jump}`);
     return jump;
   };
 
   useEffect(() => {
     pageJump.current = calculatePageJump();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredOptions, containerRef, optionRefs]);
 
   const adjustHighlightIndexWithDelta = (delta: number) => {

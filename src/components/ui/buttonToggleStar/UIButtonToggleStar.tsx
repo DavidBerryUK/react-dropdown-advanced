@@ -3,19 +3,19 @@ import UIIconStarSolid from "../../icons/UIIconStarSolid";
 import "./Styles.scss";
 
 interface iProperties {
-  showFavouritesOnly: boolean;
-  onShowFavouritesOnlyChanged: (value: boolean) => void;
+  showFavoritesOnly: boolean;
+  onShowFavoritesOnlyChanged: (value: boolean) => void;
 }
 
 const UIButtonToggleStar: React.FC<iProperties> = (props) => {
   const handleOnButtonClickedEvent = () => {
-    props.onShowFavouritesOnlyChanged(!props.showFavouritesOnly);
+    props.onShowFavoritesOnlyChanged(!props.showFavoritesOnly);
   };
 
   return (
     <div className="ui-botton-toggle-star" onClick={handleOnButtonClickedEvent}>
-      {!props.showFavouritesOnly && <UIIconStar />}
-      {props.showFavouritesOnly && <UIIconStarSolid />}
+      {!props.showFavoritesOnly && <UIIconStar />}
+      {props.showFavoritesOnly && <UIIconStarSolid />}
     </div>
   );
 };

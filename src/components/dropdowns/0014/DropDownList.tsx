@@ -5,12 +5,12 @@ import React from "react";
 interface IProperties {
   filteredOptions: OptionApiModel[];
   optionRefs: React.MutableRefObject<(DropDownItemRef | null)[]>;
-  handleOnFavouriteUpdatedEvent: (selectedValue: OptionApiModel) => void;
+  handleOnFavoriteUpdatedEvent: (selectedValue: OptionApiModel) => void;
   handleOnOptionSelectedEvent: (selectedValue: OptionApiModel, index: number) => void;
   handleMouseOverEvent: (selectedValue: OptionApiModel, index: number) => void;
 }
 
-const DropDownList: React.FC<IProperties> = ({ optionRefs, filteredOptions, handleOnFavouriteUpdatedEvent, handleOnOptionSelectedEvent, handleMouseOverEvent }) => {
+const DropDownList: React.FC<IProperties> = ({ optionRefs, filteredOptions, handleOnFavoriteUpdatedEvent, handleOnOptionSelectedEvent, handleMouseOverEvent }) => {
   if (filteredOptions.length === 0) {
     return null;
   }
@@ -20,7 +20,7 @@ const DropDownList: React.FC<IProperties> = ({ optionRefs, filteredOptions, hand
       {filteredOptions.map((option, index) => {
         return (
           <DropDownItem
-            onFavouriteUpdated={handleOnFavouriteUpdatedEvent}
+            onFavoriteUpdated={handleOnFavoriteUpdatedEvent}
             key={option.code}
             index={index}
             item={option}

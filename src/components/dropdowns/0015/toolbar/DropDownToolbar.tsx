@@ -11,13 +11,13 @@ const DropDownToolbar: React.FC<IProperties> = ({ value, onChange }) => {
   //
   // Event Handler
   //
-  const handleOnShowFavouritesOnlyChangedEvent = (showFavouritesOnly: boolean) => {
-    onChange(value.cloneWithFavouritesOnly(showFavouritesOnly));
+  const handleOnShowFavoritesOnlyChangedEvent = (showFavoritesOnly: boolean) => {
+    onChange(value.cloneWithFavoritesOnly(showFavoritesOnly));
   };
 
   return (
-    <div className="option-list-toolbar" title="Show only favourite items">
-      <UIButtonToggleStar showFavouritesOnly={value.showFavouritesOnly} onShowFavouritesOnlyChanged={handleOnShowFavouritesOnlyChangedEvent} />
+    <div className="option-list-toolbar" title="Show only favorite items">
+      <UIButtonToggleStar showFavoritesOnly={value.showFavoritesOnly} onShowFavoritesOnlyChanged={handleOnShowFavoritesOnlyChangedEvent} />
     </div>
   );
 };

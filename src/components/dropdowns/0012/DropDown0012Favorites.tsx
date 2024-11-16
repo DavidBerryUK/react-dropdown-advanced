@@ -11,10 +11,11 @@ import useMouseEventsHandler from "./hooks/UseMouseEventsHandler";
 
 const version = "12";
 const className = "demo-0012";
-const title = "Favourites (Failed)";
-const description = "allow selection of favourite items - failed - this is inefficent as renders list everytime selected index changes.";
+const title = "Favorites (Failed)";
+const description = "allow selection of favorite items - failed - this is inefficient as renders list every time selected index changes.";
 
 const DropDown0012Favorites: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [value, setValue] = useState<OptionApiModel | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,9 +51,9 @@ const DropDown0012Favorites: React.FC = () => {
     }
   };
 
-  const handleOnFavouriteUpdatedEvent = useCallback(
+  const handleOnFavoriteUpdatedEvent = useCallback(
     (updatedItem: OptionApiModel) => {
-      console.log(`Updating item ${updatedItem.text} : ${updatedItem.favourite}`);
+      console.log(`Updating item ${updatedItem.text} : ${updatedItem.favorite}`);
       // Update the listItems array with the updated item
       const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
 
@@ -83,7 +84,7 @@ const DropDown0012Favorites: React.FC = () => {
                       highlighted={highlighted}
                       onSelected={handleOnOptionSelectedEvent}
                       onMouseOver={handleMouseOverEvent}
-                      onFavouriteUpdated={handleOnFavouriteUpdatedEvent}
+                      onFavoriteUpdated={handleOnFavoriteUpdatedEvent}
                     />
                   );
                 })}
