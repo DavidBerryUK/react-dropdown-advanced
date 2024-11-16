@@ -84,7 +84,17 @@
         background-color: darken($color: $background-colour, $amount: 10);
       }
 
-      .favorite {
+      .col-favorite {
+        width: 30px !important;
+        height: 30px !important;
+        flex-shrink: 0;
+      }
+
+      .col-text {
+        flex-grow: 1;
+      }
+
+      .col-tick {
         width: 30px !important;
         height: 30px !important;
         flex-shrink: 0;

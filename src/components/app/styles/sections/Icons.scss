@@ -1,0 +1,24 @@
+.demos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 32px;
+}
+
+.icon-star {
+  stroke: darken(yellow, 10);
+}
+
+.icon-star-solid {
+  fill: darken(yellow, 20);
+}
+
+.icon-tick {
+  fill: #fff;
+  stroke: #000;
+}
+
+.icon-circle {
+  fill: #fff;
+  stroke: #000;
+}

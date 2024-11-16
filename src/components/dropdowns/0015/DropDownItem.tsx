@@ -2,6 +2,8 @@ import React, { useEffect, useState, useImperativeHandle, forwardRef, useRef } f
 import OptionApiModel from "../../../models/OptionApiModel";
 import UIIconStarSolid from "../../icons/UIIconStarSolid";
 import UIIconStar from "../../icons/UIIconStar";
+import UIIconTick from "../../icons/UIIconTick";
+import UIIconCircle from "../../icons/UIIconCircle";
 
 interface IProperties {
   index: number;
@@ -77,10 +79,13 @@ const DropDownItem = React.memo(
 
     return (
       <div ref={localRef} className={className} onClick={handleOnClickEvent} onMouseOver={handleMouseOverEvent}>
-        <div className="favorite" onClick={handleFavoriteClickEvent}>
+        <div className="col-favorite" onClick={handleFavoriteClickEvent}>
           {item.favorite ? <UIIconStarSolid /> : <UIIconStar />}
         </div>
-        <div className="text">{item.text}</div>
+        <div className="col-text">{item.text}</div>
+        <div className="col-tick">
+          <UIIconCircle />
+        </div>
       </div>
     );
   }),
