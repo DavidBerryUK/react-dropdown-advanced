@@ -24,9 +24,10 @@ const useMouseEventsHandler = (
     [setValue, setIsOpen, setSearchTerm], // Recreate only when these values change
   );
 
-  const handleMouseOverEvent = (selectedValue: OptionApiModel, index: number) => {
+  const handleMouseOverEvent = useCallback((selectedValue: OptionApiModel, index: number) => {
     setHighlightIndex(index);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     handleInputBoxClickEvent,

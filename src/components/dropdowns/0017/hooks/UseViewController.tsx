@@ -80,10 +80,12 @@ const useViewController = () => {
     setToolbarOptionsModel(value);
   };
 
-  const handleOnFavoriteUpdatedEvent = (updatedItem: OptionApiModel) => {
-    const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
-    setListItems(updatedItems);
-  };
+  const handleOnFavoriteUpdatedEvent = useCallback(
+    (updatedItem: OptionApiModel) => {
+      setListItems((prevItems) => prevItems.map((item) => (item.code === updatedItem.code ? updatedItem : item)));
+    },
+    [], // No dependencies, the function reference will remain stable
+  );
 
   /**
    * go though all items and change to select none

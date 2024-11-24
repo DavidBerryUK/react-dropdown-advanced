@@ -13,7 +13,7 @@ const UISwitchTickBox: React.FC<iProperties> = (props) => {
   };
 
   return (
-    <div className="ui-switch-tick-box" onClick={handleOnButtonClickedEvent}>
+    <div className="ui-switch-select" onClick={handleOnButtonClickedEvent}>
       {!props.value && <UIIconCircle />}
       {props.value && <UIIconTickCircle />}
     </div>

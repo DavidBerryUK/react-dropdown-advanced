@@ -15,15 +15,15 @@ const UIToolbarButton: React.FC<iProperties> = (props) => {
 
   switch (props.type) {
     case EnumToolbarButtonType.SelectAll:
-      message = "all";
+      message = "select-all";
       break;
 
     case EnumToolbarButtonType.SelectNone:
-      message = "none";
+      message = "select-none";
       break;
 
     case EnumToolbarButtonType.ShowOnlySelected:
-      message = "show sel";
+      message = "show selected";
       break;
 
     case EnumToolbarButtonType.ShowAll:

@@ -24,7 +24,6 @@ const useKeyboardEventsHandlers = (
     const averageItemHeight = totalRowHeight / itemCount;
 
     const jump = Math.floor(containerHeight / (averageItemHeight || 1));
-    console.log(`container height:${containerHeight}  rowHeights:${totalRowHeight}  items:${itemCount}  avergeHeight:${averageItemHeight}   jump:${jump}`);
     return jump;
   };
 
