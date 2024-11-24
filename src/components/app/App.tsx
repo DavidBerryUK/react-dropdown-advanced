@@ -18,6 +18,7 @@ import DropDown0014ToolBar from "../dropdowns/0014/DropDown0014Toolbar";
 import DropDown0015MultiSelect from "../dropdowns/0015/DropDown0015MultiSelect";
 import DropDown0016Optimise from "../dropdowns/0016/DropDown0016Optimise";
 import DropDown0017Toolbars from "../dropdowns/0017/DropDown0017ViewControllerToolbars";
+import DropDown0018Filtering from "../dropdowns/0018/DropDown0018Filtering";
 
 const App: React.FC = () => {
   const showHistoric = false;
@@ -45,6 +46,7 @@ const App: React.FC = () => {
       <DropDown0015MultiSelect />
       <DropDown0016Optimise />
       <DropDown0017Toolbars width={400} />
+      <DropDown0018Filtering width={400} />
     </div>
   );
 };
