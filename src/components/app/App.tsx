@@ -1,4 +1,6 @@
 import "../../styles/Styles.scss";
+import React from "react";
+
 import DropDown0001Standard from "../dropdowns/0001/DropDown0001Standard";
 import DropDown0002Searchable from "../dropdowns/0002/DropDown0002Searchable";
 import DropDown0003Popup from "../dropdowns/0003/DropDown0003Popup";
@@ -15,7 +17,7 @@ import DropDown0013FavoritesV2 from "../dropdowns/0013/DropDown0013FavoritesV2";
 import DropDown0014ToolBar from "../dropdowns/0014/DropDown0014Toolbar";
 import DropDown0015MultiSelect from "../dropdowns/0015/DropDown0015MultiSelect";
 import DropDown0016Optimise from "../dropdowns/0016/DropDown0016Optimise";
-import React from "react";
+import DropDown0017Toolbars from "../dropdowns/0017/DropDown0017ViewControllerToolbars";
 
 const App: React.FC = () => {
   const showHistoric = false;
@@ -42,6 +44,7 @@ const App: React.FC = () => {
       )}
       <DropDown0015MultiSelect />
       <DropDown0016Optimise />
+      <DropDown0017Toolbars width={400} />
     </div>
   );
 };
