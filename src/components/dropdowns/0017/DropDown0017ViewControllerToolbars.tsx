@@ -10,7 +10,7 @@ import useViewController from "./hooks/UseViewController";
 const version = "17";
 const className = "demo-0017";
 const title = "View Controller";
-const description = "View Controller, Width, Toolbars, Clear Text Button";
+const description = "View Controller, Width, Toolbars, Speedup";
 
 interface IProperties {
   width?: number;
