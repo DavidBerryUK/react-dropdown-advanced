@@ -9,6 +9,7 @@ const useAutoItemFocus = (optionRefs: React.MutableRefObject<(HTMLDivElement | n
       behavior: "auto",
       block: "nearest",
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highlightIndex]);
 };
 

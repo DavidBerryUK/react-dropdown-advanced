@@ -10,7 +10,7 @@ const title = "Better Popup";
 const description = "Make the drop down list 'popup' rather than expanding the container";
 
 const DropDown0003Popup: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

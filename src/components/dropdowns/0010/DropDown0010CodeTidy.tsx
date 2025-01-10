@@ -32,7 +32,7 @@ const DropDown0010CodeTidy: React.FC = () => {
   const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setSearchTerm, setHighlightIndex);
 
   useEffect(() => {
-    setCustomers(FactoryListData.getCustomers());
+    setCustomers(FactoryListData.getCustomersLargeList());
   }, []);
 
   /**

@@ -9,7 +9,7 @@ const title = "Native Select";
 const description = "The HTML Native Select Element";
 
 const DropDown0001Standard: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
 
   return (
     <DemoContainer className={className} version={version} title={title} description={description}>

@@ -12,7 +12,7 @@ const title = "Keep Focus";
 const description = "keep visual focus on the selected item when pressing up/down, previously the selected item wasn't visible.";
 
 const DropDown0006KeepFocus: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

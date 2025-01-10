@@ -1,0 +1,39 @@
+.demo-container {
+  width: 650px;
+  .ui-virtual-list {
+    margin: 20px;
+    ol {
+      border: solid 1px grey;
+      background-color: white;
+      width: 100%;
+      height: 600px;
+      width: 400px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 4px;
+        height: 24px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  button {
+    margin: 4px;
+    padding: 8px;
+    border-radius: 8px;
+    border: solid 1px grey;
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: row;
+
+    gap: 100px;
+    margin: 20px;
+  }
+}

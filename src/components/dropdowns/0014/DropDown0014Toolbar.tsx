@@ -45,7 +45,7 @@ const DropDown0014ToolBar: React.FC = () => {
   const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setHeightLightIndex, setSearchTerm);
 
   useEffect(() => {
-    const customers = FactoryListData.getCustomers();
+    const customers = FactoryListData.getCustomersLargeList();
     setListItems(customers);
   }, []);
 

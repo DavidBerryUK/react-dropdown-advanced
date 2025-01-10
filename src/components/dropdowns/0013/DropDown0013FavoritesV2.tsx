@@ -42,7 +42,7 @@ const DropDown0013FavoritesV2: React.FC = () => {
   const { handleInputBoxClickEvent, handleOnOptionSelectedEvent, handleMouseOverEvent } = useMouseEventsHandler(isOpen, setIsOpen, setValue, setSearchTerm);
 
   useEffect(() => {
-    const customers = FactoryListData.getCustomers();
+    const customers = FactoryListData.getCustomersLargeList();
     setListItems(customers);
   }, []);
 

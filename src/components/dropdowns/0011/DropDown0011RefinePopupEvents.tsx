@@ -15,7 +15,8 @@ const title = "Refine Popup Events";
 const description = "Open popup when start typing, allow clearing of text box,";
 
 const DropDown0011RefinePopupEvents: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [value, setValue] = useState<OptionApiModel | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

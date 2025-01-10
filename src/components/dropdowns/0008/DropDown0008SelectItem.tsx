@@ -13,7 +13,7 @@ const description =
   "allow select item using mouse end ENTER key, allow focus of selected item to be controlled by mouse hover or up & down keys. Fix highlight limits when moving up and down using keys";
 
 const DropDown0008SelectItem: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

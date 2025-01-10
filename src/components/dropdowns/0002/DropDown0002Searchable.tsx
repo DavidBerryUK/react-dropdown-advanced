@@ -10,7 +10,7 @@ const title = "Basic & Searchable";
 const description = "A Very basic dropdown with a UL List that is searchable";
 
 const DropDown0002Searchable: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
 
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
   const [isOpen, setIsOpen] = useState(false);

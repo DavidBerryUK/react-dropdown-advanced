@@ -11,7 +11,7 @@ const title = "Render Sub Items";
 const description = "Render sub items as components";
 
 const DropDown0004SubItems: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

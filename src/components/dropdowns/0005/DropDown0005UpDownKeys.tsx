@@ -12,7 +12,7 @@ const title = "Up/Down Keys";
 const description = "process keyboard events for up down keys when the list is open. Just basic capturing";
 
 const DropDown0005UpDownKeys: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

@@ -30,7 +30,7 @@ const DropDown0012Favorites: React.FC = () => {
   useAutoItemFocus(optionRefs, highlightIndex);
 
   useEffect(() => {
-    setListItems(FactoryListData.getCustomers());
+    setListItems(FactoryListData.getCustomersLargeList());
   }, []);
 
   const { handleKeyDownEvent } = useKeyboardEventsHandlers(isOpen, highlightIndex, filteredOptions, setHighlightIndex, optionRefs, containerRef, setIsOpen, setValue, setSearchTerm);

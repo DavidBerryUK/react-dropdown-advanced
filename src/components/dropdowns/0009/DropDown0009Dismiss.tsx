@@ -12,7 +12,7 @@ const title = "Dismiss Popup";
 const description = "Dismiss popup when click outside popup";
 
 const DropDown0009Dismiss: React.FC = () => {
-  const [customers] = useState(FactoryListData.getCustomers());
+  const [customers] = useState(FactoryListData.getCustomersLargeList());
   const [value, setValue] = useState<OptionApiModel>(new OptionApiModel("", ""));
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
