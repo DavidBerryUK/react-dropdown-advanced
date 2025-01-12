@@ -16,7 +16,6 @@ export default class FactoryListData {
   }
 
   static getSuppliersSmallList(): Array<OptionApiModel> {
-    console.log("FactoryListData:getSuppliersSmallList");
     var options = new Array<OptionApiModel>();
     suppliersSmall.forEach((item) => {
       options.push(new OptionApiModel(`${item.id}`, item.name));
@@ -26,7 +25,6 @@ export default class FactoryListData {
   }
 
   static getSuppliersLargeList(): Array<OptionApiModel> {
-    console.log("FactoryListData:getSuppliersLargeList");
     var options = new Array<OptionApiModel>();
     suppliersLarge.forEach((item) => {
       options.push(new OptionApiModel(`${item.id}`, item.name));
@@ -36,7 +34,6 @@ export default class FactoryListData {
   }
 
   static getCustomersSmallList(): Array<OptionApiModel> {
-    console.log("FactoryListData:getCustomersSmallList");
     var options = new Array<OptionApiModel>();
     customersSmall.forEach((item) => {
       options.push(new OptionApiModel(`${item.id}`, item.name));
@@ -46,7 +43,6 @@ export default class FactoryListData {
   }
 
   static getCustomersLargeList(): Array<OptionApiModel> {
-    console.log("FactoryListData:getCustomersLargeList");
     var options = new Array<OptionApiModel>();
     customersLarge.forEach((item) => {
       options.push(new OptionApiModel(`${item.id}`, item.name));

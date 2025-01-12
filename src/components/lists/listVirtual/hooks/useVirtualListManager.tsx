@@ -1,29 +1,20 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
-import VirtualListConfigurationModel from "../VirtualListConfigurationModel";
+import VirtualListConfigurationModel from "../models/VirtualListConfigurationModel";
 import Size from "../../../models/Size";
 import OptionApiModel from "../../../../models/OptionApiModel";
-import UIListCell from "../UIListCell";
-//import OptionApiModel from "../../../../models/OptionApiModel";
-//import UIListCell from "../UIListCell";
+import CellCollection from "../models/CellCollection";
+import useCellLayoutDelegate from "./useCellLayoutDelegate";
 
 const useVirtualListManager = (options: Array<OptionApiModel>) => {
   const containerDivRef = useRef<HTMLDivElement>(null);
   const [textContainerInfo, setTextContainerInfo] = useState("");
   const virtualListConfiguration = useRef(new VirtualListConfigurationModel());
-
-  //   const cellReferences = useRef<HTMLDivElement[]>([]);
-
-  //   const getAvailableCell = (): React.RefObject<HTMLDivElement> => {
-  //     return { current: cellAvailableReferences.current[0] };
-  //   };
-
-  //   const cellUpdateData = (data: OptionApiModel) => {};
-
   const [cellElements, setCellElements] = useState<Array<ReactNode>>([]);
-  const cellReferences = useRef<Array<HTMLDivElement | null>>([]);
+  const cellCollection = useRef<CellCollection>(new CellCollection());
+  const cellLayoutDelegate = useCellLayoutDelegate();
 
   /**
-   * Startup - get container size
+   * On startup - get the container size
    */
   useEffect(() => {
     if (containerDivRef.current) {
@@ -38,30 +29,35 @@ const useVirtualListManager = (options: Array<OptionApiModel>) => {
     }
   }, []);
 
+  //
+  // Whenever the list of options changes, create
+  // a number of cell.
   useEffect(() => {
     const totalCells = virtualListConfiguration.current.linesToDisplay;
-    // Initialize refs only once
-    if (cellReferences.current.length !== totalCells) {
-      cellReferences.current = Array(totalCells)
-        .fill(null)
-        .map(() => null);
-    }
-    // Create UIListCells and assign refs
-    const cells = Array.from({ length: totalCells }, (_, i) => <UIListCell key={i} ref={(el) => (cellReferences.current[i] = el)} />);
-    setCellElements(cells);
-
-    // Set the text content of the .text element inside each UIListCell
-    for (let i = 0; i < totalCells; i++) {
-      const cell = cellReferences.current[i];
-
-      if (cell) {
-        const textElement = cell.querySelector(".title");
-        if (textElement) {
-          textElement.textContent = `item-${i}`;
-        }
-      }
+    console.log("Virtual List Manager - options have changed");
+    /*
+     * Create initial cells to be displayed on screen
+     */
+    if (cellCollection.current.count === 0) {
+      console.log("Create initial cells");
+      cellCollection.current.createCollection(totalCells);
+      const cells = cellCollection.current.cellElements;
+      // force a re-render
+      setCellElements(cells);
+    } else {
+      console.log("Resetting all cells");
+      cellCollection.current.resetAll();
     }
   }, [options]);
+
+  //
+  // When the cell elements change check to see if the cells
+  // have been rendered.
+  useEffect(() => {
+    cellCollection.current!.checkIfCellsAreAvailableForUse();
+    cellLayoutDelegate.layout(options, cellCollection.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cellElements, options]);
 
   return {
     containerDivRef,

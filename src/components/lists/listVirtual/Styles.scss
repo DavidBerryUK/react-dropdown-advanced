@@ -38,27 +38,44 @@
       height: 600px;
       border: solid 10px grey;
       background-color: white;
+      position: relative;
 
       .list-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        user-select: none;
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: space-between;
         // have a fixed height to assist with virtual layout
         height: 32px;
+        border: solid 2px lightblue;
+        background-color: lighten(lightblue, 15);
+        box-sizing: border-box;
+        border-radius: 4px;
 
         .title {
           margin-left: 4px;
           margin-right: 4px;
           white-space: nowrap;
           text-overflow: ellipsis;
+          overflow: hidden;
+          flex-shrink: 1;
         }
         .check {
+          flex-shrink: 0;
           display: flex;
           align-items: center;
           justify-content: center;
           width: 28px;
           height: 28px;
-          border: solid 1px black;
+          border: solid 1px gray;
+          color: gray;
+          font-weight: lighter;
+
           border-radius: 4px;
         }
       }

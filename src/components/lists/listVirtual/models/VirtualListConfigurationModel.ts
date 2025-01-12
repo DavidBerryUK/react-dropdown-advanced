@@ -1,4 +1,4 @@
-import Size from "../../models/Size";
+import Size from "../../../models/Size";
 
 export default class VirtualListConfigurationModel {
   private _containerSize: Size = new Size(0, 0);
