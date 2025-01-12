@@ -12,6 +12,8 @@ export default class CellModel {
   reference: RefObject<HTMLDivElement>;
 
   private elementText: Element | null;
+  private _y: number;
+  private _title: string;
 
   constructor(collectionManager: CellCollection) {
     this.id = nanoid();
@@ -19,6 +21,8 @@ export default class CellModel {
     this.state = EnumCellState.created;
     this.elementText = null;
     this.collectionManager = collectionManager;
+    this._y = 0;
+    this._title = "";
   }
 
   static create(collectionManager: CellCollection): CellModel {
@@ -60,7 +64,12 @@ export default class CellModel {
     }
     if (this.elementText) {
       this.elementText.textContent = value;
+      this._title = value;
     }
+  }
+
+  get title(): string {
+    return this._title;
   }
 
   //
@@ -71,6 +80,11 @@ export default class CellModel {
       console.log("Can not set y, cell has not been rendered");
       return;
     }
+    this._y = value;
     this.reference.current.style.top = `${value}px`;
+  }
+
+  get y(): number {
+    return this._y;
   }
 }

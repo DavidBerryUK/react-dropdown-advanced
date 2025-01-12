@@ -4,22 +4,31 @@ import Size from "../../../models/Size";
 import OptionApiModel from "../../../../models/OptionApiModel";
 import CellCollection from "../models/CellCollection";
 import useCellLayoutDelegate from "./useCellLayoutDelegate";
+import useScrollMonitor from "./useScrollMonitor";
 
 const useVirtualListManager = (options: Array<OptionApiModel>) => {
-  const containerDivRef = useRef<HTMLDivElement>(null);
+  const containerOuterDivRef = useRef<HTMLDivElement>(null);
+  const containerInnerDivRef = useRef<HTMLDivElement>(null);
+
   const [textContainerInfo, setTextContainerInfo] = useState("");
   const virtualListConfiguration = useRef(new VirtualListConfigurationModel());
   const [cellElements, setCellElements] = useState<Array<ReactNode>>([]);
   const cellCollection = useRef<CellCollection>(new CellCollection());
-  const cellLayoutDelegate = useCellLayoutDelegate();
+  const cellLayoutDelegate = useCellLayoutDelegate(virtualListConfiguration.current!);
+
+  const onScroll = (offset: number) => {
+    cellLayoutDelegate.layout(containerOuterDivRef, options, cellCollection.current);
+  };
+
+  useScrollMonitor(containerOuterDivRef, onScroll);
 
   /**
    * On startup - get the container size
    */
   useEffect(() => {
-    if (containerDivRef.current) {
-      var width = containerDivRef.current.clientWidth;
-      var height = containerDivRef.current.clientHeight;
+    if (containerOuterDivRef.current) {
+      var width = containerOuterDivRef.current.clientWidth;
+      var height = containerOuterDivRef.current.clientHeight;
       if (width !== virtualListConfiguration.current.containerSize.width || height !== virtualListConfiguration.current.containerSize.height) {
         virtualListConfiguration.current.containerSize = new Size(width, height);
         virtualListConfiguration.current.lineHeight = 32;
@@ -48,6 +57,14 @@ const useVirtualListManager = (options: Array<OptionApiModel>) => {
       console.log("Resetting all cells");
       cellCollection.current.resetAll();
     }
+
+    // SET HEIGHT OF INNER CONTAINER
+    if (containerInnerDivRef.current) {
+      const height = `${virtualListConfiguration.current.lineHeight * options.length}px`;
+
+      console.log(`Set Container Height:${height}`);
+      containerInnerDivRef.current.style.height = height;
+    }
   }, [options]);
 
   //
@@ -55,12 +72,13 @@ const useVirtualListManager = (options: Array<OptionApiModel>) => {
   // have been rendered.
   useEffect(() => {
     cellCollection.current!.checkIfCellsAreAvailableForUse();
-    cellLayoutDelegate.layout(options, cellCollection.current);
+    cellLayoutDelegate.layout(containerOuterDivRef, options, cellCollection.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellElements, options]);
 
   return {
-    containerDivRef,
+    containerOuterDivRef,
+    containerInnerDivRef,
     textContainerInfo,
     cellElements,
   };

@@ -19,6 +19,10 @@ export default class VirtualListConfigurationModel {
     this.calculateLayoutSettings();
   }
 
+  get lineHeight(): number {
+    return this._lineHeight;
+  }
+
   get linesToDisplay(): number {
     return this._linesToDisplay;
   }

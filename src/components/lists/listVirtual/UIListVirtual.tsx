@@ -11,7 +11,7 @@ const UIListVirtual: React.FC = () => {
 
   const { options, handleOnListClearEvent, handleOnLoadCustomersLargeEvent, handleOnLoadCustomersSmallEvent, handleOnLoadSuppliersSmallEvent, handleOnLoadSuppliersLargeEvent } = useDataLoader();
 
-  const { cellElements, containerDivRef, textContainerInfo } = useVirtualListManager(options);
+  const { cellElements, containerInnerDivRef, containerOuterDivRef, textContainerInfo } = useVirtualListManager(options);
 
   useEffect(() => {
     setTextListCount(`lines:${options.length}`);
@@ -36,8 +36,10 @@ const UIListVirtual: React.FC = () => {
           <UIStandardList options={options} />
         </div>
 
-        <div ref={containerDivRef} className="virtual-list-demo">
-          {cellElements.map((item) => item)}
+        <div ref={containerOuterDivRef} className="ui-virtual-list">
+          <div className="container-inner" ref={containerInnerDivRef}>
+            {cellElements.map((item) => item)}
+          </div>
         </div>
       </div>
     </div>
