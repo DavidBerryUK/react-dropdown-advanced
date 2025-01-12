@@ -15,9 +15,6 @@ const UIListToolbar: React.FC<IProperties> = (props) => {
       <button onClick={props.onLoadCustomerLarge}>Customers (long)</button>
       <button onClick={props.onLoadSuppliersSmall}>Suppliers (small)</button>
       <button onClick={props.onLoadSuppliersLarge}>Suppliers (long)</button>
-      <div className="stats">
-        <div>{props.listSize} items</div>
-      </div>
     </div>
   );
 };

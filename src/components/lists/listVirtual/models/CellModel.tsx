@@ -1,8 +1,8 @@
-import { ReactNode, createRef, RefObject } from "react";
-import UIListCell from "../UIListCell";
 import { nanoid } from "nanoid";
-import EnumCellState from "../enums/EnumCellState";
+import { ReactNode, createRef, RefObject } from "react";
 import CellCollection from "./CellCollection";
+import EnumCellState from "../enums/EnumCellState";
+import UIListCell from "../UIListCell";
 
 export default class CellModel {
   collectionManager: CellCollection;
@@ -10,6 +10,7 @@ export default class CellModel {
   state: EnumCellState;
   element: ReactNode;
   reference: RefObject<HTMLDivElement>;
+  rowNumber: number;
 
   private elementText: Element | null;
   private _y: number;
@@ -22,11 +23,13 @@ export default class CellModel {
     this.elementText = null;
     this.collectionManager = collectionManager;
     this._y = 0;
+    this.rowNumber = -1;
     this._title = "";
   }
 
   static create(collectionManager: CellCollection): CellModel {
     const cell = new CellModel(collectionManager);
+    cell.state = EnumCellState.created;
     cell.element = <UIListCell key={cell.id} ref={cell.reference} />;
     return cell;
   }
@@ -43,13 +46,13 @@ export default class CellModel {
   // make the cell available and clear down any data
   //
   reset() {
-    if (this.state === EnumCellState.inUse) {
-      this.state = EnumCellState.available;
-      this.collectionManager.makeAvailable(this);
-    }
+    this.state = EnumCellState.available;
     if (this.isRendered) {
       this.title = "";
     }
+    // must call makeAvailable before changing row number
+    this.collectionManager.makeAvailable(this);
+    this.rowNumber = -1;
   }
 
   //

@@ -3,45 +3,19 @@
   margin-right: 10px;
 
   .list-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    flex-direction: row;
-    border: solid 2px red;
-    gap: 32px;
-
-    .standard-list-demo {
-      .list-container {
-        border: solid 10px grey;
-        background-color: white;
-        width: 340px;
-        height: 600px;
-
-        overflow-x: hidden;
-        overflow-y: auto;
-        list-style-type: none;
-
-        .list-item {
-          display: flex;
-          align-items: center;
-          // have a fixed height to assist with virtual layout
-          height: 32px;
-          margin-left: 4px;
-          margin-right: 4px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
     .ui-virtual-list {
       width: 340px;
       height: 600px;
-      border: solid 10px grey;
+      border: solid 1px grey;
       background-color: white;
       overflow-y: auto;
+      font-size: 12px;
 
       .container-inner {
-        border: dashed 2px red;
         position: relative;
 
         .list-item {
@@ -69,6 +43,7 @@
             text-overflow: ellipsis;
             overflow: hidden;
             flex-shrink: 1;
+            text-transform: capitalize;
           }
           .check {
             flex-shrink: 0;
@@ -94,14 +69,6 @@
     padding: 8px;
     border-radius: 8px;
     border: solid 1px grey;
-  }
-
-  .stats {
-    display: flex;
-    flex-direction: row;
-
-    gap: 100px;
-    margin: 20px;
   }
 }
 

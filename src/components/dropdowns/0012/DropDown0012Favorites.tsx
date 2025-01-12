@@ -53,7 +53,7 @@ const DropDown0012Favorites: React.FC = () => {
 
   const handleOnFavoriteUpdatedEvent = useCallback(
     (updatedItem: OptionApiModel) => {
-      console.log(`Updating item ${updatedItem.text} : ${updatedItem.favorite}`);
+      // console.log(`Updating item ${updatedItem.text} : ${updatedItem.favorite}`);
       // Update the listItems array with the updated item
       const updatedItems = listItems.map((item) => (item.code === updatedItem.code ? updatedItem : item));
 

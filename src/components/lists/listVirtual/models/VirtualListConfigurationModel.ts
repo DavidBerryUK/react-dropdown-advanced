@@ -29,6 +29,6 @@ export default class VirtualListConfigurationModel {
 
   private calculateLayoutSettings() {
     // calculate the number of lines that will fit in the on screen container (will need cater for partial item views)
-    this._linesToDisplay = Math.floor(this._containerSize.height / this._lineHeight);
+    this._linesToDisplay = Math.floor(this._containerSize.height / this._lineHeight) + 8;
   }
 }

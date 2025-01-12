@@ -15,9 +15,10 @@ const useVirtualListManager = (options: Array<OptionApiModel>) => {
   const [cellElements, setCellElements] = useState<Array<ReactNode>>([]);
   const cellCollection = useRef<CellCollection>(new CellCollection());
   const cellLayoutDelegate = useCellLayoutDelegate(virtualListConfiguration.current!);
+  const localOptions = useRef<Array<OptionApiModel>>(new Array<OptionApiModel>());
 
   const onScroll = (offset: number) => {
-    cellLayoutDelegate.layout(containerOuterDivRef, options, cellCollection.current);
+    cellLayoutDelegate.layout(localOptions.current, containerOuterDivRef, cellCollection.current);
   };
 
   useScrollMonitor(containerOuterDivRef, onScroll);
@@ -43,18 +44,17 @@ const useVirtualListManager = (options: Array<OptionApiModel>) => {
   // a number of cell.
   useEffect(() => {
     const totalCells = virtualListConfiguration.current.linesToDisplay;
+    localOptions.current = options;
     console.log("Virtual List Manager - options have changed");
     /*
      * Create initial cells to be displayed on screen
      */
     if (cellCollection.current.count === 0) {
-      console.log("Create initial cells");
       cellCollection.current.createCollection(totalCells);
       const cells = cellCollection.current.cellElements;
       // force a re-render
       setCellElements(cells);
     } else {
-      console.log("Resetting all cells");
       cellCollection.current.resetAll();
     }
 
@@ -62,7 +62,6 @@ const useVirtualListManager = (options: Array<OptionApiModel>) => {
     if (containerInnerDivRef.current) {
       const height = `${virtualListConfiguration.current.lineHeight * options.length}px`;
 
-      console.log(`Set Container Height:${height}`);
       containerInnerDivRef.current.style.height = height;
     }
   }, [options]);
@@ -72,7 +71,7 @@ const useVirtualListManager = (options: Array<OptionApiModel>) => {
   // have been rendered.
   useEffect(() => {
     cellCollection.current!.checkIfCellsAreAvailableForUse();
-    cellLayoutDelegate.layout(containerOuterDivRef, options, cellCollection.current);
+    cellLayoutDelegate.layout(options, containerOuterDivRef, cellCollection.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellElements, options]);
 

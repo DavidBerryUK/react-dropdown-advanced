@@ -2,8 +2,6 @@ import "./Styles.scss";
 import UIListToolbar from "../components/UIListToolbar";
 import useDataLoader from "../hooks/useDataLoader";
 import React, { useEffect, useState } from "react";
-
-import UIStandardList from "./disposable-code/UIStandardList";
 import useVirtualListManager from "./hooks/useVirtualListManager";
 
 const UIListVirtual: React.FC = () => {
@@ -32,10 +30,6 @@ const UIListVirtual: React.FC = () => {
       <div className="list-gallery">
         <div>List Count:{textListCount}</div>
         <div>ContainerSize:{textContainerInfo}</div>
-        <div className="standard-list-demo">
-          <UIStandardList options={options} />
-        </div>
-
         <div ref={containerOuterDivRef} className="ui-virtual-list">
           <div className="container-inner" ref={containerInnerDivRef}>
             {cellElements.map((item) => item)}
